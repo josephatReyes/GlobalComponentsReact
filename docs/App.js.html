@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: App.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: App.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useEffect } from 'react';
+
+import './App.css';
+import TabController from './TabController/TabController';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+
+import HeaderContainer from './headerContainer';
+
+import {Treebeard} from 'react-treebeard';
+import TreeView from './treeView/';
+
+import Form from 'react-bootstrap/Form';
+import UserController from './user/user';
+
+/**
+ * @file Global Components.
+ * @author Rignet Developers team
+ * @see  &lt;img width="120px" src="https://www.rig.net/wp-content/uploads/2019/01/cropped-Rignet_Logo2x.png"
+ */
+
+
+
+
+
+
+function App() {
+
+  let TABS = [{ title: "Map", content: 
+ "heoll"
+  , icon: "icon-map", closeable: false },
+  { title: "Dashboard", content: "Text example for Dashboard", icon: "icon-dashboard", closeable: false },
+  { title: "Camera 1", content: "Text example for camera 1", icon: "icon-camera", closeable: true }
+    ,
+  { title: "Camera 2", content: "Text example for camera 2", icon: "icon-camera", closeable: true }
+    ,
+  { title: "Camera 3", content: "Nothing to show", icon: "icon-camera", closeable: true }
+  ]
+const treeArray=[{openned:false, title:'Rignet', children: [{openned: false, title:'Customer', children: []}]}]
+const [dataToDisplay, setDataToDisplay]=useState([]);
+  const [tabs, setTabs] = useState(TABS);
+  const [activeTab, setActiveTab] = useState(TABS[0].title);
+const [show, setShow]= useState(true);
+const [searchText, setSearchText]= useState('');
+
+useEffect(()=>{
+  console.log(dataToDisplay)
+setDataToDisplay(data);
+
+},[])
+useEffect(()=>{
+
+ // console.log(searchText);
+  setDataToDisplay(searchInObject(searchText,data));
+ // console.log(dataToDisplay);
+},
+[searchText])
+
+///This is the expample of data structure for the 
+//Treeview Component
+let data = [{
+  name: 'Rignet',
+  toggled: true,
+  withIcon:true,
+  withCircles:true,
+  red: 10,
+  green: 512,
+  yellow: 100,
+  gray: 123,
+labelStyle:{color:'#EF7622', fontWeight: 'bold'},
+  menuContext:[{id:"Option1", icon:"any", label: "Option1"},{id:"Option2", icon:"any", label: "Option2"}],
+  children: [
+      {
+          name: 'Costumers',
+          toggled: true,
+          labelStyle:{color:'black', fontWeight: '600'},
+gray: 10,
+yellow: 100,
+green: 12,
+          withIcon:true,  withCircles:true,
+
+          children: [
+              { name: 'Site truck',toggled: true,   withIcon:true, withCircles:false,
+                icon: {className:'fas fa-truck',style:{color: '#ef7622', fontSize: '14px'}},
+                
+                
+              children:[
+                   {  
+                     
+                    
+                       name: "Device site 1",
+                       icon: {className:'fas fa-video',style:{color: '#ef7622', fontSize: '14px', marginLeft: '5px'}},
+                      
+                      toggled:false  ,
+                      withCircles:false,   
+                      
+                      children:[
+
+                      ]
+                  },
+                  {
+                      name:"Device site 2",
+                      icon: {className:'fas fa-video',style:{color: '#ef7622', fontSize: '14px',marginLeft: '5px'}},
+                      toggled:false,
+                      withCircles:false,
+                  }
+
+              ]
+          
+          },
+              { name: 'Site',
+              icon: {className:'fas fa-ship', style:{color: '#ef7622', fontSize: '14px'}},
+            
+              toggled: false, withIcon:true, withCircles:false,}
+          ]
+      },
+      {
+          name: 'Costumer 2',
+          labelStyle:{color:'black', fontWeight: '600'},
+          toggled: false,
+          loading: true,
+          withIcon:true,  withCircles:true,
+          children: []
+      },
+      {
+          name: 'Costumer',
+          labelStyle:{color:'black', fontWeight: '600'},
+          toggled: false,
+          withIcon:true,  withCircles:true,
+          children: [
+              {
+                  name: 'Site',
+                  toggled:false,
+                  withIcon:true,
+                  icon: {className:'fas fa-ship',style:{color: '#ef7622', fontSize: '14px'}},
+              
+                  withCircles:false,
+                  children: [
+                      { name: 'Device', toggled: false,withCircles:false,
+                      icon: {className:'fas fa-video', style:{color: '#ef7622', fontSize: '14px',marginLeft: '5px'}},
+                    
+                        children: [
+                              {name: "new",
+                                  children : [
+
+                                        {
+                                          name: "new level",
+
+                                          children: [
+                                            {name: "new",
+                                                children : [
+              
+                                                      {
+                                                        name: "new level",
+                                                      }
+                                                ]
+                                           }
+              
+                                      ]
+                                        }
+                                  ]
+                             }
+
+                        ]
+                    },
+                      { name: 'Device', toggled:false,withCircles:false, 
+                      icon: {className:'fas fa-video',style:{color: '#ef7622', fontSize: '14px', marginLeft: '5px'}},
+                    }
+                  ]
+              }
+          ]
+      }
+  ]
+},
+{name: "Rignet2", toggled:true, 
+labelStyle:{color:'#EF7622', fontWeight: 'bold'},
+withCircles:true,
+red: 10,
+green: 5,
+yellow: 1,
+gray: 0,
+withIcon:true , children:[
+  {name:"Costumer",
+  labelStyle:{color:'black', fontWeight: '600'},
+}
+]},
+
+
+
+
+
+]
+
+
+
+const handleClose=()=>{
+  setShow(!show);
+}
+
+  const addTab = () => {
+
+    let tabsAux = [...tabs];
+    let newTab = {
+      title: "Camera " + tabsAux.length, content: &lt;Button type="submit">Button&lt;/Button>, icon: "icon-camera", closeable: true
+    }
+
+    //Si ya existe la nueva tab solo se activa
+    if (tabsAux.find((tab) => { return tab.title === newTab.title }) != null) {
+      setActiveTab(newTab.title);
+      // console.log("Se activa la nueva tab", this.state.activeTab);
+    } else {
+      tabsAux.push(newTab);
+      setTabs(tabsAux);
+    }
+
+
+  }
+
+  const handleSearch=(e)=>{
+
+    const value = e.target.value;
+const name= e.target.name
+    if(name==="searchText"){setSearchText(value)
+    
+   
+    }
+  }
+
+
+
+  const closeTab = (i) => {
+
+
+    let tabsAux = [...tabs];
+
+    tabsAux.splice(i, 1);
+
+
+    setTabs(tabsAux);
+  }
+
+  const selectTab = (activeTab) => {
+    setActiveTab(activeTab);
+  }
+
+ const  handleSelectionChange=(selection)=> {
+   // this.setState({ selection: selection })
+  }
+
+
+
+  const searchInNodes = (criteria,node,apc) =>{
+    for(let nodeItem in node){
+        if(nodeItem.toString().toLowerCase() == 'name' ){
+            if(node[nodeItem].toString().toLowerCase().includes(criteria.toString().toLowerCase())){
+                apc = 1; 
+            }
+        }
+        if(node[nodeItem].length &amp;&amp; typeof node[nodeItem] != 'string'){
+           
+            node[nodeItem].forEach( (nodeItemObject) => {
+                apc = searchInNodes(criteria,nodeItemObject,apc)
+            })
+        }
+    }
+    return apc;
+}
+
+const searchInObject = (criteria , data) => {
+    if(criteria!=''){
+        let auxData = data.filter( (dataItem) =>{
+            // search retorna 1 si encontro coincidencia en el nodo
+            return searchInNodes(criteria,dataItem,0) == 1;
+            
+        })
+       return(auxData)
+    }else{
+        return (data)
+    }
+    
+}
+
+
+
+  const tree = [{
+    text: 'Furniture', expanded: true, items: [
+        { text: 'Tables &amp; Chairs' }, { text: 'Sofas' }, { text: 'Occasional Furniture' }]
+}, {
+    text: 'Decor', items: [
+        { text: 'Bed Linen' }, { text: 'Curtains &amp; Blinds' }, { text: 'Carpets' }]
+}];
+
+  return (
+    &lt;div className="App">
+
+      &lt;div className="header">
+        &lt;HeaderContainer />
+
+
+    &lt;Form.Control type="text" placeholder="search" name="searchText" value={searchText} onChange={handleSearch} />
+
+&lt;UserController/>
+      &lt;/div>
+      &lt;div className="body-content" >
+
+
+        &lt;div  id="style-4" className="tree scrollbar">
+         
+     
+
+      {/**
+      
+       &lt;Button type="submit" onClick={() => { addTab(); }}>Add Tab&lt;/Button>*/
+
+            &lt;TreeView data={dataToDisplay}
+           onceClick={(res)=>{console.log("Clciked", res)}} 
+           doubleClick={(res)=>{  ;console.log("Double clicked->", res)}}
+           rightEvent={(res)=>{console.log("Right Click", res)}}
+           />
+      } 
+ 
+       
+        &lt;/div>
+
+        &lt;div className="tab-controller-content">
+          &lt;TabController tabs={tabs} closeTab={closeTab} activeTab={activeTab} selectTab={selectTab} />
+        &lt;/div>
+        
+      &lt;/div>
+    &lt;/div>
+  );
+
+}
+
+export default App;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Node.html">Node</a></li><li><a href="TreeView.html">TreeView</a></li><li><a href="UserController.html">UserController</a></li></ul><h3>Global</h3><ul><li><a href="global.html#TabController">TabController</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Mon Apr 22 2019 15:03:05 GMT-0500 (GMT-05:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

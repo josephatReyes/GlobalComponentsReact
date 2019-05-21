@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: TabController/TabController.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: TabController/TabController.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useEffect } from 'react';
+import Tabs from 'react-bootstrap/Tabs';
+import Tab from 'react-bootstrap/Tab'
+import './TabController.css'
+
+
+  /**
+   * 
+   * Props For the component 
+   * 
+   * @param {array} tabs: "Array of tabs instead in the tabs controller"
+   * @param {function} closeTab : "Function will be executed after close a tab"
+   * @param {function} selectTab: "Function after select a tab"
+   * @param {string}  activeTab: "String for the Title of tab will be oppenned at begin"
+   *  
+   * Tabs Object Structure
+   * @param {string}  title: "Title of the tab"
+   * @param {any} content: "Content will be showed after select a tab"
+   * @param {string} icon: "String for the Icon of the tab can beb -> 'icon-camera, icon-dashboard, icon-map'",
+   * @param {boolean} closeable: "boolean to indicate if a tab can be close it ""
+   */
+
+function TabController(props){
+
+ const [tabs, setTabs]= useState([]);
+ const [activeTab, setActiveTab]= useState(props.activeTab);
+ const [lastTabSelected, setLastTabSelected]= useState(props.activeTab);
+const [showControls, setShowControls]= useState(false);
+
+ const closeTab = (e, tab, index) => {
+
+  e.stopPropagation();
+  if (tab.closeable) {
+    if (tab.title === activeTab) {
+    setActiveTab( (activeTab === lastTabSelected ? tabs[index - 1].title : lastTabSelected) )
+    } else {
+    } props.closeTab(index);
+  }
+}
+
+const selectTab = (newActive) => {
+
+  setLastTabSelected(activeTab);
+  setActiveTab(newActive);
+  props.selectTab(activeTab);
+}
+
+
+const moveLeft = () => {
+  scrollLeft(document.getElementsByClassName('nav'), -300, 1000);
+}
+const moveRight = () => {
+  scrollRight(document.getElementsByClassName('nav'), -300, 1000);
+}
+
+const scrollLeft = (elements, change, duration) => {
+  let element = elements[0];
+
+  var currentTime = 0,  
+    increment = 20;
+
+  
+
+  var animateScroll = function () {
+    currentTime += increment;
+
+    element.scrollLeft -= 1;
+    if (currentTime &lt; duration) {
+      setTimeout(animateScroll, increment);
+    }
+  };
+  animateScroll();
+}
+
+
+
+const scrollRight = (elements, change, duration) => {
+  let element = elements[0];
+
+  var currentTime = 0,
+    increment = 10;
+
+  var animateScroll = function () {
+    currentTime += increment;
+    element.scrollLeft += 1;
+    if (currentTime &lt; duration) {
+      setTimeout(animateScroll, increment);
+    }
+  };
+  animateScroll();
+}
+
+useEffect(() => {
+  // Update the document title using the browser API
+  setTabs(props.tabs);
+
+  var nav = document.getElementsByClassName("nav");
+  if(nav){
+//cada caja de la camara mide 134px su sumatoria debe ser menor al clienWidth del nav para que 
+// caso contrario se muestran los controles
+let maxWidth= nav[0].clientWidth;
+let realWidth=138*tabs.length;  
+if(realWidth>maxWidth){
+setShowControls(true);
+}else{
+  setShowControls(false);
+}
+  }
+ 
+
+});
+
+
+
+return(
+  &lt;Tabs defaultActiveKey="profile" id="uncontrolled-tab-example"
+  activeKey={activeTab}
+  onSelect={(activeTab) => { selectTab(activeTab) }}
+>
+
+
+  {tabs.map((tab, index) => {
+
+    return (
+      &lt;Tab key={index} eventKey={tab.title} title={&lt;div className="tab-ctn">
+        &lt;i className={activeTab === tab.title ? tab.icon + '-active' : tab.icon} />
+        {tab.title} &lt;i onClick={(e) => { closeTab(e, tab, index) }}
+          className={tab.closeable ? activeTab === tab.title
+            ? 'close-tab-active' : 'close-tab' : ''}  >&lt;/i> {activeTab === tab.title || tabs.length-1 === index?'':&lt;div className="line-side">&lt;/div> }  &lt;/div>}  >
+        {/**
+              Here Goes the content of the  Tab
+        */}
+        &lt;div className="Tab-content">
+        {/**Those are the btn controllers for the scrollbar */}
+          {showControls ? &lt;div className="btn-left-scroll" onClick={() => { moveLeft() }} > &lt;/div> : ''}
+          {showControls ?
+            &lt;div className="btn-right-scroll" onClick={() => { moveRight() }}>  &lt;/div> : ''}
+          {tab.content}
+        &lt;/div>
+      &lt;/Tab>
+    );
+  })}
+
+&lt;/Tabs>
+
+
+);
+}
+export default TabController;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Node.html">Node</a></li><li><a href="TreeView.html">TreeView</a></li><li><a href="UserController.html">UserController</a></li></ul><h3>Global</h3><ul><li><a href="global.html#TabController">TabController</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Mon Apr 22 2019 15:03:05 GMT-0500 (GMT-05:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

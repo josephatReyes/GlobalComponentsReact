@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: treeView/TreeView.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: treeView/TreeView.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useEffect } from 'react';
+import Dropdown from 'react-bootstrap/Dropdown'
+import './treeview.css';
+import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
+import Node from './node.js'
+
+/**
+ * Treeview is the component 
+ * @param data: object
+ */
+const TreeView = props => {
+    const [data, setData] = useState(props.data);
+
+    useEffect(() => {
+
+     //   console.log("Here is necesary made some change")
+    })
+
+
+    const toogle = () => {
+        let newData = { ...data };
+        newData.toggled = !data.toggled;
+        setData(newData);
+        console.log(data)
+    }
+    
+    return (
+
+        &lt;div className="global-ctn">
+            &lt;Node label={data.name} toggled={data.toggled} toogleEvent={toogle}
+             icon={data.withIcon}
+             idkey={data.name}
+              circles={data.withCircles}
+               onceClick={()=>{
+
+                toogle();
+                if(props.onceClick){props.onceClick({item: data, level: 1, indexes: [0]})}
+               }} 
+               
+               doubleClick={()=>{
+
+                if(props.doubleClick){
+                    props.doubleClick({item: data, level: 1, indexes: [0]});
+                }
+            }}
+
+            rightEvent={()=>{
+
+                if(props.rightEvent){
+                    props.rightEvent({item: data, level: 1, indexes: [0]});
+                }
+            }}
+
+               >
+
+                {data.toggled ? data.children.map((Costumer, index) => {
+                    return (
+                        &lt;Node key={"firstChild-" + index} toggled={Costumer.toggled} 
+                        icon={Costumer.children!=null ?Costumer.withIcon : false } circles={Costumer.withCircles} 
+                        idkey={Costumer.name + index}
+                       
+                        onceClick={() => {
+
+                            if(props.onceClick){
+                                let newData = { ...data };
+                                newData.children[index].toggled = !newData.children[index].toggled;
+                                setData(newData);
+                                props.onceClick({item: Costumer, level: 2, indexes: [index]});
+                            }
+                       
+                        }} 
+
+                        doubleClick={()=>{
+
+                            if(props.doubleClick){
+                                props.doubleClick({item: Costumer, level: 2, indexes: [index]});
+                            }
+                        }}
+
+                        rightEvent={()=>{
+
+                            if(props.rightEvent){
+                                props.rightEvent({item: Costumer, level: 2, indexes: [index]});
+                            }
+                        }}
+
+                        
+                       label={Costumer.name}
+                       toogleEvent={() => {
+                        let newData = { ...data };
+                        newData.children[index].toggled = !newData.children[index].toggled;
+                        setData(newData);
+                    }} 
+              
+                       
+                       
+                       >
+
+                            {Costumer.toggled ? Costumer.children.map((Site, index2) => {
+                                return (
+
+
+                                    &lt;Node key={"secondChild-" + index2} label={Site.name}
+                                        toggled={Site.toggled}
+                                        idkey={Site.name + index2}
+                                        icon={Site.children?Site.withIcon:false}
+                                        circles={Site.withCircles}
+
+                                        onceClick={
+                                            () => {
+                                                if(props.onceClick){
+                                                let newData = { ...data };
+                                                newData.children[index].children[index2].toggled = !newData.children[index].children[index2].toggled;
+                                                setData(newData);
+                                                    props.onceClick({item: Site, level: 3, indexes: [index, index2]});
+                                            }
+                                        }}
+
+                                        doubleClick={()=>{
+
+                                            if(props.doubleClick){
+                                                props.doubleClick({item: Site, level: 3, indexes: [index, index2]});
+                                            }
+                                        }}
+
+                                        rightEvent={()=>{
+
+                                            if(props.rightEvent){
+                                                props.rightEvent(({item: Site, level: 3, indexes: [index, index2]}));
+                                            }
+                                        }}
+
+                                        toogleEvent={() => {
+                                            let newData = { ...data };
+                                            newData.children[index].children[index2].toggled = !newData.children[index].children[index2].toggled;
+                                            setData(newData);
+
+
+                                        }}
+                                    >
+                                        {(Site.toggled &amp;&amp; Site.children) ? Site.children.map((Device, index3) => {
+
+                                            return (
+                                                &lt;Node key={"thirdChild" + index3} label={Device.name} toggled={true} icon={Device.withIcon}
+                                                    circles={Device.withCircles}
+                                                    type={'Device'}
+                                                    idkey={Device.name + index2}
+                                                    onceClick={()=>{
+
+                                                        if(props.onceClick){
+                                                            props.onceClick({item: Device, level: 4, indexes: [index, index2, index3]})
+                                                        }
+
+                                                    }}
+
+                                                    doubleClick={()=>{
+
+                                                        if(props.doubleClick){
+                                                            props.doubleClick({item: Device, level: 4, indexes: [index, index2, index3]});
+                                                        }
+                                                    }}
+
+                                                    rightEvent={()=>{
+
+                                                        if(props.rightEvent){
+                                                            props.rightEvent(({item: Device, level: 4, indexes: [index, index2, index3]}));
+                                                        }
+                                                    }}
+                                                >
+                                                &lt;/Node>
+                                            );
+                                        }) : ''}
+
+                                    &lt;/Node>
+                                );
+                            }) : ''}
+
+                        &lt;/Node>
+                    );
+                }) : ''}
+            &lt;/Node>
+        &lt;/div>
+    )
+}
+
+export default TreeView;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Node.html">Node</a></li><li><a href="global.html#TreeView">TreeView</a></li></ul><h3>Global</h3><ul><li><a href="global.html#TabController">TabController</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Mon Apr 22 2019 11:12:38 GMT-0500 (GMT-05:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -66,3 +66,11 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
+/**
+ * @file index.js is the root file for the example.
+ * It kicks things off.
+ * @author Your name goes here
+ * @see <a href="https://developers.docusign.com">DocuSign Developer Center</a>
+ */

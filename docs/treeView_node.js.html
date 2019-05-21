@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: treeView/node.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: treeView/node.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useEffect } from 'react';
+import Badge from 'react-bootstrap/Badge';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+
+import Tooltip from 'react-bootstrap/Tooltip';
+import Popover from 'react-bootstrap/Popover';
+import Overlay from 'react-bootstrap/Overlay';
+
+import './treeview.css';
+import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
+
+
+
+
+
+/**
+ * 
+ * Node is an single elemento into the treeview component
+ * @constructor 
+ *@param {string } label The text will be showed 
+ *@param {string} idkey The key to link a context menu its UNIQUE
+ *@param {number} leafs List of options into the menuContext
+ *@param {boolean} circles To display the circles 
+ *@param {number}  red To display in red circle
+ *@param {number}  green To display in green circle
+ *@param {number}  yellow To display in yellow circle
+ *@param {number}  gray To display in gray circle
+ *@param {bold} bold  To ddisplay the label in bold
+ *@param {hasChildren} hasChildren To display de menus to hide and show the children
+ *@param {string} textColor To display on a different color the label  
+ *@param {boolean} icon If the add or less must be showed
+ *@param {string} iconClass ClassName for the icon
+ *@param {boolean} toggled If is toggled or not 
+ *@param {function} toggleEvent Event to control de toggle event
+ *@param {function} onceClick Event after a single click 
+ *@param {function} doubleClick  Event after a double click
+ *@param {function} eventMenu Event after a click on context menus
+ *@param {array} menuCtx List of options into the menuContext
+*/
+const Node = props => {
+
+    const [showTooltip, setShowTooltip]=useState(false);
+    const [target, setTarget]= useState();
+    const [valueTooltip, setValueTooltip] = useState("");
+
+
+    const changeValue=(value)=>{
+        setValueTooltip(value);
+    }
+    
+ 
+   // console.log("Imprimiemdo props--->", props)
+    
+    return (
+
+        &lt;div className="global-node">
+
+
+            &lt;ContextMenuTrigger id={'' + props.idkey}>
+
+                &lt;div className="node-ctn">
+
+
+                    &lt;div className={props.circles ? "label" : "label fat"}
+                        onClick={() => { props.onceClick ? props.onceClick() : console.log("") }}
+                        onDoubleClick={(e) => { props.doubleClick ? props.doubleClick() : console.log("") }}
+
+                    >
+                        {props.iconClass != '' ?
+                            &lt;div className="iconos">
+
+                                &lt;i className={props.iconClass.className} style={props.iconClass.style}>&lt;/i>
+                            &lt;/div>
+                            : ''}
+
+                        &lt;span style={props.labelStyle} >
+                            {props.label  }
+                            &lt;span>
+                            { props.leafs >0?'('+ props.leafs +')':''} 
+
+                            &lt;/span>
+                     
+                        &lt;/span>
+
+                    &lt;/div>
+
+
+
+                    {props.circles ?
+                        &lt;div className="circles">
+                            &lt;div className={props.yellow == 0 ? 'circle yellow inactive' : 'circle yellow'}>{props.yellow.toString().length>2?'99':props.yellow}
+
+{(props.yellow.toString().length>2)? 
+    &lt;div className="badge-custom yellow" onMouseOver={({ target })=>{setTarget(target); setShowTooltip(!showTooltip); setValueTooltip(props.yellow)}} onMouseLeave={({target})=>{setTarget(target); setShowTooltip(!showTooltip); setValueTooltip("")}} >+&lt;/div>
+
+:
+''
+}                  
+
+
+                            &lt;/div>
+
+                            &lt;div className={props.green == 0 ? 'circle green inactive' : 'circle green'} >{props.green.toString().length>2?'99':props.green}
+                            {(props.green.toString().length>2)? 
+    &lt;div className="badge-custom green" onMouseOver={({ target })=>{setTarget(target); setShowTooltip(!showTooltip); setValueTooltip(props.green)}} onMouseLeave={({target})=>{setTarget(target); setShowTooltip(!showTooltip); setValueTooltip("")}} >+&lt;/div>
+
+:
+''
+}       
+                            &lt;/div>
+                            &lt;div className={props.red == 0 ? 'circle red inactive' : 'circle red'} >{props.red.toString().length>2?'99':props.red}
+                            {(props.red.toString().length>2)? 
+    &lt;div className="badge-custom red" onMouseOver={({ target })=>{setTarget(target); setShowTooltip(!showTooltip); setValueTooltip(props.red)}} onMouseLeave={({target})=>{setTarget(target); setShowTooltip(!showTooltip); setValueTooltip("")}} >+&lt;/div>
+
+:
+''
+}       
+                            &lt;/div>
+                            &lt;div className={props.gray == 0 ? 'circle gray inactive' : 'circle gray'}>{props.gray.toString().length>2?'99':props.gray}
+                            {(props.gray.toString().length>2)? 
+    &lt;div className="badge-custom gray" onMouseOver={({ target })=>{setTarget(target); setShowTooltip(!showTooltip); setValueTooltip(props.gray)}} onMouseLeave={({target})=>{setTarget(target); setShowTooltip(!showTooltip); setValueTooltip("")}} >+&lt;/div>
+
+:
+''
+}       
+                            &lt;/div>
+                        &lt;/div>
+                        : &lt;div className="circles light">&lt;/div>}
+
+                    {
+                        props.hasChildren ?
+                            &lt;div className="icon-ctn" onClick={props.toggleEvent ? () => { props.toggleEvent() } : null}>
+                                {props.icon ? !props.toggled ?
+                                    &lt;div className="icon-open animate-zoom   ">&lt;/div> :
+                                    &lt;div className="icon-close animate-opacity">&lt;/div> : ''}
+                            &lt;/div>
+                            :
+                            &lt;div className="icon-ctn">
+
+                            &lt;/div>
+                    }
+
+
+                &lt;/div>
+
+            &lt;/ContextMenuTrigger>
+            &lt;div className={props.toggled ? 'child visible-top' : 'child visible-bottom'}>
+
+
+
+
+                {
+                    props.children
+                }
+
+
+            &lt;/div>
+
+
+            {props.menuCtx ? props.menuCtx.length > 0 ?
+                &lt;ContextMenu className="menu-ctnx" id={'' + props.idkey} onClick={() => { alert("Ayuda") }}>
+
+                    {props.menuCtx ? props.menuCtx.length > 0 ? props.menuCtx.map((option, index) => {
+                        return (
+                            &lt;MenuItem key={option + index} preventClose={false} data={{ option: option.id }} onClick={() => { props.eventMenu(option) }}>
+                                {option.id}
+                            &lt;/MenuItem>
+                        );
+                    }) : '' : ''}
+
+                &lt;/ContextMenu>
+
+
+                : '' : ''}
+    &lt;Overlay
+          show={showTooltip}
+          target={target}
+          placement="right"
+         
+  
+        >
+       
+       &lt;div className="tooltip-custom">
+{valueTooltip}
+       &lt;/div>
+        &lt;/Overlay>
+
+
+
+        &lt;/div>
+    );
+}
+
+export default Node</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Node.html">Node</a></li><li><a href="TreeView.html">TreeView</a></li><li><a href="UserController.html">UserController</a></li></ul><h3>Global</h3><ul><li><a href="global.html#TabController">TabController</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Mon Apr 22 2019 15:03:05 GMT-0500 (GMT-05:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,226 @@
+.nav-tabs {
+  height: 38px;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  display: -webkit-box;
+  flex-direction: row;
+}
+
+nav::-webkit-scrollbar {
+  width: 1rem;
+  background: green;
+  display: none;
+}
+
+nav::-webkit-scrollbar-track {
+  visibility: hidden;
+}
+
+nav::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 0px solid slategrey;
+}
+nav::-webkit-scrollbar-button {
+  width: 30px;
+
+  cursor: pointer !important;
+  position: relative;
+  background: transparent;
+}
+.nav-tabs .nav-link {
+  color: #77787c;
+  font-size: 13px;
+
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+}
+.nav-tabs .nav-link:hover {
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+}
+
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+  color: white;
+  background-color: #ef7622;
+  border-radius: 0px;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  background: purple;
+  position: absolute;
+  top: 10px;
+}
+
+.tab-ctn {
+  width: auto;
+  display: flex;
+  align-items: center;
+}
+
+.Tab-content {
+  background: #eee;
+  width: 100%;
+  height: calc(100vh - 150px);
+  overflow-y: auto;
+  position: relative;
+}
+/*Icons*/
+.icon-map {
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  margin-right: 5px;
+  background-image: url(./imgs/icon_map.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.icon-dashboard {
+  width: 20px;
+  height: 20px;
+  background: #ef7622;
+  margin-right: 5px;
+  background-image: url(./imgs/icon_dashboard.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.icon-camera {
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  margin-right: 5px;
+  background-image: url(./imgs/icon_camera.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.icon-map-active {
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  margin-right: 5px;
+  background-image: url(./imgs/icon_map_active.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.icon-dashboard-active {
+  width: 20px;
+  height: 20px;
+  background: white;
+  margin-right: 5px;
+  background-image: url(./imgs/icon_dash_active.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.icon-camera-active {
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  margin-right: 5px;
+  background-image: url(./imgs/icon_camera_active.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.close-tab {
+  width: 16px;
+  height: 16px;
+  background: transparent;
+  margin-left: 5px;
+
+  background-image: url(./imgs/icon_close_tab.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.6;
+}
+
+.close-tab-active {
+  width: 16px;
+  height: 16px;
+  background: transparent;
+  margin-left: 5px;
+
+  background-image: url(./imgs/icon_close_tab_active.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.6;
+}
+
+.close-tab:hover {
+  opacity: 1;
+}
+
+.close-tab-active:hover {
+  opacity: 1;
+}
+
+.btn-left-scroll {
+  position: absolute;
+  top: -38px;
+  z-index: 9000;
+  width: 18px;
+  height: 38px;
+  background-color: #eaf2ff;
+  background-image: url(./imgs/leftscroll.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.btn-right-scroll {
+  position: absolute;
+  top: -38px;
+  right: 0px;
+  z-index: 9000;
+  width: 18px;
+  height: 38px;
+  background-color: #eaf2ff;
+  background-image: url(./imgs/rightscroll.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+}
+
+@keyframes appear {
+  from {
+    top: -76px;
+  }
+  to {
+    top: -38;
+  }
+}
+
+.nav-link {
+  display: block;
+  padding: 0.7rem 1rem;
+}
+.line-side {
+  box-sizing: border-box;
+  height: 20px;
+  position: relative;
+  left: 17px;
+  width: 1px;
+  background: #e6e6e6;
+}

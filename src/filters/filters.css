@@ -1,0 +1,458 @@
+.input-calendar-custom{
+    margin-right: 10px;
+margin-top: 10px;
+}
+.calendar-custom{
+    background: #ffff;
+    margin-right: 10px;
+}
+
+.filter-ctn{
+    width: 100%;
+    display: flex; 
+    align-items: center;
+    height: 40px;;
+    padding: 5px 5px 5px 5px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    -webkit-animation-duration: 0.40s;
+    animation-duration: 0.40s;
+    -webkit-animation-name: fadeIn ;
+  animation-name: fadeIn ;
+}
+.filter-ctn span{
+    margin-right: 5px;
+    padding-left: 20px;
+    color: #77787C;	font-size: 13px;	font-weight: 600;	line-height: 18px;
+}
+.filter-ctn .react-calendar__tile--active {
+
+    background: #EF7622;
+    
+    
+}
+.react-date-picker__wrapper{
+    background: #fff;
+}
+.react-datetime-picker__wrapper{
+    background: #ffff;
+}
+/*Para poder agregar un icono especial poner en none el svg y agregar el icono como background
+.react-date-picker__button:enabled svg{
+    display: none;
+}*/
+
+.filter-ctn .react-calendar__tile--active:hover {
+
+    background: #EF7622;
+    
+    
+}
+
+.filter-double-ctn{
+  justify-content: space-between;
+
+}
+.input-group{
+  position: relative;
+}
+.input-group:after{
+
+  content:'';
+  
+  position: absolute;
+  background: transparent;
+  z-index: 10;
+  color:#EF7622;
+  border-right: none;
+  width: 40px;
+  height: 40px;
+  top:0px; right:0px;
+  background-image: url(../../src/assets/img/icon_search.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+ 
+
+}
+
+
+.input-group-append{
+    border: none;
+}
+.input-group-text:focus{
+background: #eeee;
+border-color:transparent;
+}
+.input-group-append{
+
+
+}
+
+
+#inputForm{
+    width:100%;
+}
+#selectForm{
+    width: 100%;
+}
+.align-self-bottom{
+    background: transparent;
+    align-self: flex-end;
+}
+
+.form-control.is-valid, .was-validated .form-control:valid {
+  border-color: #ced4da;
+  padding-right: calc(1.5em + .75rem);
+  background-image: none;  background-repeat: no-repeat;
+  background-position: center right calc(.375em + .1875rem);
+  background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+}
+.was-validated .form-control:valid {
+  border: 1px solid #ced4da;
+  padding-right: calc(1.5em + .75rem);
+  background-image: none;
+  background-repeat: no-repeat;
+  background-position: center right calc(.375em + .1875rem);
+  background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+}
+
+.was-validated .form-control:focus {
+  border: 1px solid #ced4da;
+  padding-right: calc(1.5em + .75rem);
+  background-image: none;
+  background-repeat: no-repeat;
+  background-position: center right calc(.375em + .1875rem);
+  background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+}
+.form-control.is-valid:focus, .was-validated .form-control:valid:focus {
+  border-color: #ced4da;
+  box-shadow: 0 0 0 0.0rem rgba(40,167,69,.25);
+}
+
+.lupe{
+  display: flex;
+  align-items: center;
+  padding: 0px 10px 0px 10px; 
+  background: #ffff;
+  cursor: pointer;
+  color:#EF7622;
+  border:none;
+  height: 40px;
+transition: all .4s;
+-moz-transform: scaleX(-1);
+-o-transform: scaleX(-1);
+-webkit-transform: scaleX(-1);
+transform: scaleX(-1);
+-ms-filter: "FlipH";
+filter: FlipH;
+}
+.lupe:focus{
+  background: #fff;
+  border:none;
+}
+
+.lupe:hover{
+  color:#ee8c46;
+  font-size: 1.2rem;
+
+}
+.lupe:active{
+  border:none;
+}
+.label-select{
+  line-height: 0px;
+}
+/*ANIMATIONS___*/
+@keyframes bounceIn {
+    from,
+    20%,
+    40%,
+    60%,
+    80%,
+    to {
+      -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+      animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+  
+    0% {
+      opacity: 0;
+      -webkit-transform: scale3d(0.3, 0.3, 0.3);
+      transform: scale3d(0.3, 0.3, 0.3);
+    }
+  
+    20% {
+      -webkit-transform: scale3d(1.1, 1.1, 1.1);
+      transform: scale3d(1.1, 1.1, 1.1);
+    }
+  
+    40% {
+      -webkit-transform: scale3d(0.9, 0.9, 0.9);
+      transform: scale3d(0.9, 0.9, 0.9);
+    }
+  
+    60% {
+      opacity: 1;
+      -webkit-transform: scale3d(1.03, 1.03, 1.03);
+      transform: scale3d(1.03, 1.03, 1.03);
+    }
+  
+    80% {
+      -webkit-transform: scale3d(0.97, 0.97, 0.97);
+      transform: scale3d(0.97, 0.97, 0.97);
+    }
+  
+    to {
+      opacity: 1;
+      -webkit-transform: scale3d(1, 1, 1);
+      transform: scale3d(1, 1, 1);
+    }
+  }
+  
+  .bounceIn {
+    -webkit-animation-duration: 0.75s;
+    animation-duration: 0.75s;
+    -webkit-animation-name: bounceIn;
+    animation-name: bounceIn;
+  }
+
+  @-webkit-keyframes rollIn {
+    from {
+      opacity: 0;
+      -webkit-transform: translate3d(-100%, 0, 0) rotate3d(0, 0, 1, -120deg);
+      transform: translate3d(-100%, 0, 0) rotate3d(0, 0, 1, -120deg);
+    }
+  
+    to {
+      opacity: 1;
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  
+  @keyframes rollIn {
+    from {
+      opacity: 0;
+      -webkit-transform: translate3d(-100%, 0, 0) rotate3d(0, 0, 1, -120deg);
+      transform: translate3d(-100%, 0, 0) rotate3d(0, 0, 1, -120deg);
+    }
+  
+    to {
+      opacity: 1;
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  
+  .rollIn {
+    -webkit-animation-name: rollIn;
+    animation-name: rollIn;
+  }
+  
+
+  
+@-webkit-keyframes hinge {
+    0% {
+      -webkit-transform-origin: top left;
+      transform-origin: top left;
+      -webkit-animation-timing-function: ease-in-out;
+      animation-timing-function: ease-in-out;
+    }
+  
+    20%,
+    60% {
+      -webkit-transform: rotate3d(0, 0, 1, 80deg);
+      transform: rotate3d(0, 0, 1, 80deg);
+      -webkit-transform-origin: top left;
+      transform-origin: top left;
+      -webkit-animation-timing-function: ease-in-out;
+      animation-timing-function: ease-in-out;
+    }
+  
+    40%,
+    80% {
+      -webkit-transform: rotate3d(0, 0, 1, 60deg);
+      transform: rotate3d(0, 0, 1, 60deg);
+      -webkit-transform-origin: top left;
+      transform-origin: top left;
+      -webkit-animation-timing-function: ease-in-out;
+      animation-timing-function: ease-in-out;
+      opacity: 1;
+    }
+  
+    to {
+      -webkit-transform: translate3d(0, 700px, 0);
+      transform: translate3d(0, 700px, 0);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes hinge {
+    0% {
+      -webkit-transform-origin: top left;
+      transform-origin: top left;
+      -webkit-animation-timing-function: ease-in-out;
+      animation-timing-function: ease-in-out;
+    }
+  
+    20%,
+    60% {
+      -webkit-transform: rotate3d(0, 0, 1, 80deg);
+      transform: rotate3d(0, 0, 1, 80deg);
+      -webkit-transform-origin: top left;
+      transform-origin: top left;
+      -webkit-animation-timing-function: ease-in-out;
+      animation-timing-function: ease-in-out;
+    }
+  
+    40%,
+    80% {
+      -webkit-transform: rotate3d(0, 0, 1, 60deg);
+      transform: rotate3d(0, 0, 1, 60deg);
+      -webkit-transform-origin: top left;
+      transform-origin: top left;
+      -webkit-animation-timing-function: ease-in-out;
+      animation-timing-function: ease-in-out;
+      opacity: 1;
+    }
+  
+    to {
+      -webkit-transform: translate3d(0, 700px, 0);
+      transform: translate3d(0, 700px, 0);
+      opacity: 0;
+    }
+  }
+  
+  .hinge {
+    -webkit-animation-duration: 2s;
+    animation-duration: 2s;
+    -webkit-animation-name: hinge;
+    animation-name: hinge;
+  }
+
+  
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  -webkit-animation-duration: 0.75s;
+  animation-duration: 0.75s;
+  -webkit-animation-name: fadeIn 1s;
+  animation-name: fadeIn 1s;
+}
+
+@keyframes appear {
+  from{
+    opacity: 0;
+  }
+}
+.appear{
+  opacity: 1;
+  animation: appear 1.5s;
+}
+.special-container{
+
+  min-width: 539px;;
+}
+
+.input-group {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  width: 100%;
+  border: 1px solid #646569;
+  background: #fff;
+}
+
+
+
+.form-control {
+    display: block;
+    color: #495057;
+    background-color: #fff;
+  border: none;
+
+}
+
+.input-group>.custom-select:not(:last-child), .input-group>.form-control:not(:last-child) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: 0px;
+}
+.input-group{
+  border: 1px solid #646569;
+}
+#select{
+  height: 40px;;
+  border: 1px solid #646569;
+  border-radius: 0px;
+}
+
+.customText{
+  color: #495057 !important;
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  width: 100%;
+  border: 1px solid #646569 !important;
+  background: #fff !important;
+}
+.customText-select{
+  color: #495057 !important;
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  width: 100%;
+  border: 1px solid #646569 !important;
+  background: #fff !important;
+
+}
+
+.content-input-form{
+
+  position: relative;
+}
+.content-input-form:after{
+  content:'';
+  
+  position: absolute;
+  background: transparent;
+  z-index: 10;
+  color:#EF7622;
+  border-right: none;
+  width: 40px;
+  height: 40px;
+  top:0px; right:0px;
+  background-image: url(../../src/assets/img/icon_search.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+ 
+}

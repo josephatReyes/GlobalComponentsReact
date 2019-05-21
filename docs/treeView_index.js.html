@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: treeView/index.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: treeView/index.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useEffect } from 'react';
+import Dropdown from 'react-bootstrap/Dropdown'
+import './treeview.css';
+import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
+import Node from './node.js'
+
+/**
+ * Treeview is the component where all nodes will be render
+ * @constructor
+ * @param {array} data Tree with the differents levels 
+ */
+const TreeView = props => {
+
+    const [data, setData] = useState(props.data);
+    const [levels, setLevels] = useState([]);
+const [makechanges, setChanges]= useState(false);
+    let fondos = 0;
+    let arrayFondos = [];
+ useEffect(()=>{
+    setData(props.data);
+ },[props.data])
+
+    /**
+     * A recursive method to draw the different nodes into the treeView it called by first time after into the 
+     * map of the props.data 
+     * @param {Node} node Is a node element will be rendered into the treeview
+     * @returns {Nodes}  A map of node.children 
+     */
+const drawNodes=(node)=>{
+//console.log("NODO->", node);
+return (
+&lt;Node label={node.name} idkey={1234} 
+        toggled= {node.toggled}
+        toggled= {node.toggled}
+        labelStyle={node.labelStyle}
+        icon={node.withIcon}
+        iconClass={node.icon?node.icon: ''}
+        circles={node.withCircles}
+        leafs={node.children?10:0}
+        yellow={node.yellow?node.yellow:0}
+        green={node.green? node.green:0}
+        red={node.red?node.red:0}
+        gray={node.gray?node.gray:0}
+        hasChildren={node.children? node.children.length>0 ? true:false:false  }
+        toggleEvent={()=>{
+            node.toggled = !node.toggled;
+              setChanges(!makechanges);
+     }}
+        >
+
+
+           {    node.children ? node.children.length >0? 
+    
+
+            node.children.map((nodeItem, index)=>{
+    
+    
+            return(
+               
+                         &lt;Node key={nodeItem.name+index} label={nodeItem.name} idkey={"id-"+nodeItem.name+index}   
+                         toggled= {nodeItem.toggled}
+                         icon={nodeItem.withIcon}
+                         labelStyle={nodeItem.labelStyle}
+                         hasChildren={nodeItem.children? nodeItem.children.length>0 ? true:false:false  }
+                         leafs={nodeItem.children?nodeItem.children.length:0}
+                         iconClass={nodeItem.icon?nodeItem.icon: ''}
+                         circles={nodeItem.withCircles}
+                         yellow={nodeItem.yellow?nodeItem.yellow:0}
+                         green={nodeItem.green? nodeItem.green:0}
+                         red={nodeItem.red?nodeItem.red:0}
+                         gray={nodeItem.gray?nodeItem.gray:0}
+                         toggleEvent={()=>{
+                            nodeItem.toggled = !nodeItem.toggled;
+                                 setChanges(!makechanges);
+                        }}
+             
+             
+                         >
+                         {nodeItem.children?
+                                nodeItem.children.map((leaf, index)=>{
+                                    return(drawNodes(leaf));
+                                })
+                            :''}
+                     &lt;/Node>
+               
+                 
+                 
+             
+            );
+            })
+    
+    
+    :'':''
+    
+    }
+           
+        &lt;/Node>
+);
+
+   
+}
+
+
+/**
+ * toggleFather close and open a node in the top level 
+ * @param {this} item  item that will be close
+ * @param {number} index indicates the index for the father item, its necessary to close it. 
+ * 
+ * @example
+ * // will be toggle the item element with position 1 in the data array
+ * toggleFather(item, 1);
+ */
+const toggleFather=(item, index)=>{
+  //  console.log("item->",item)
+    //console.log("index->", data[index]);
+                      //  console.log("click");
+                      let algo = [...data]
+                      algo[index].toggled = !algo[index].toggled;
+                     console.log("valor de algo->",algo)
+                          setData(algo);
+                          console.log("Nuevo valor",data[index].toggled)
+}
+
+    let i = 0;
+
+
+    return (
+
+        &lt;div className="global-ctn">
+            {data.map((item, index) => {
+                return (
+
+                    &lt;Node label={item.name} key={item.name + index} idkey={item.name + index}
+                    toggled={item.toggled} 
+                    circles={item.withCircles}
+                    red={item.red}
+                    iconClass={item.icon?item.icon: ''}
+                    yellow={item.yellow}
+                    green={item.green}
+                    gray={item.gray}
+                    hasChildren={item.children? item.children.length>0 ? true:false:false  }
+                    leafs={item.children?item.children.length:0}
+                  labelStyle={item.labelStyle}
+                    menuCtx= {item.menuContext?item.menuContext.length>0? item.menuContext:[]:[]}
+                    eventMenu={(e)=>{console.log(e)}}
+                    rightEvent={()=>{console.log("Ayuda")}}
+
+                    toggleEvent={()=>{toggleFather(item, index) }             
+                    }
+                    icon={item.withIcon}
+                   
+                    >
+                        {
+                        item.children.map((newitem, index)=>{
+                            return (
+                                &lt;div key={newitem.name+index}>
+                         {drawNodes(newitem)}
+
+                                &lt;/div>
+                             
+                            )
+                        })}
+                        
+                    &lt;/Node>
+                );
+
+            })}
+        &lt;/div>
+    );
+
+
+}
+
+export default TreeView;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Node.html">Node</a></li><li><a href="TreeView.html">TreeView</a></li><li><a href="UserController.html">UserController</a></li></ul><h3>Global</h3><ul><li><a href="global.html#TabController">TabController</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Mon Apr 22 2019 15:03:05 GMT-0500 (GMT-05:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+.table-custom{
+    background: #fff;
+}
+
+.flex-center{
+    display: flex;
+
+
+}
+
+.flex-center-content{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    background: red;
+    height: 40px;
+}
+
+
+.headerSelected{
+    color: #EF7622;		
+    position: relative;
+    font-weight: bold;
+}
+
+.headerSelected::after{
+    content: "";
+    position: absolute;
+    left: 0px;
+    bottom: 0px; 
+    height: 3px;
+    background: #EF7622;
+    width: 100%;
+    animation: growWith .5s;
+    
+}
+
+@keyframes growWith {
+    from{
+        width: 0%
+        
+    }
+    to{
+        width: 100%;
+    }
+}
+
+
+.table{
+    padding-left: 5px;
+}
+.tableHead{
+    border: 1px solid #D8D8D8;	
+    background-color: #EEEEEE;
+    cursor: pointer;
+    text-align: center;
+    font-size: 13px;
+    color: #77787C;
+}
+
+.counterButton{
+    border: 1px solid #646569;	
+    border-radius: 2px;	
+    background-color: #FFFFFF;
+    height: 35px;	
+    width: 51px;
+    color: #000;
+    font-size: 15px;
+    text-align: center;
+    padding-top: 5px;
+    cursor: pointer;
+}
+
+.footerTable{
+    border: 1px solid #D8D8D8;
+    background-color: #FAFAFA;
+    padding: 8px;
+    font-size: 14px;
+    color: #77787C;
+
+}
+
+.tableBottom{
+    margin-bottom: 0px !important;
+    border-bottom: 0px !important;
+}
+
+.numberPage{
+    height: 35px;
+    width: 51px;		
+    font-size: 13px;	
+    font-weight: 600;	
+    line-height: 18px;	
+    text-align: center;
+    border: 1px solid #646569;
+}
+
+.leftPage{
+    height: 25px;
+    width: 22px;
+    border: none;
+    background-color: #FAFAFA;
+    background-image: url(../../src/assets/img/left_end.svg);  
+    background-repeat: no-repeat;
+    padding: 14px;
+}
+
+.leftPageEnd{
+    height: 25px;
+    width: 14px;
+    border: none;
+    background-color: #FAFAFA;
+    background-image: url(../../src/assets/img/left.svg);
+    background-repeat: no-repeat;
+    padding: 14px;
+}
+
+.rigthPage{
+    height: 25px;
+    width: 22px;
+    border: none;
+    background-color: #FAFAFA;
+    background-image: url(../../src/assets/img/right_end.svg);  
+    background-repeat: no-repeat;
+    padding: 14px;
+}
+
+.rigthPageEnd{
+    height: 25px;
+    width: 14px;
+    border: none;
+    background-color: #FAFAFA;
+    background-image: url(../../src/assets/img/right.svg);
+    background-repeat: no-repeat;
+    padding: 14px;
+}
+
+.dropdown-table{
+    background: #FAFAFA !important; 
+    height: 35px;	
+    width: 51px;
+}
+
+.table>thead>tr>th{
+    padding-left:7px;
+}
+.table>tbody>tr>td{
+    cursor: pointer;
+}
+
+.HeaderRow>table>tbody>tr>td {
+    height: 20px !important;
+ 
+}
+.blankSpace{
+
+    border: none;
+    border-top: 1px solid transparent !important;
+padding-left: 5px !important;
+padding-right: 5px !important; 
+    width: 10px;
+}
+.table{
+    border: 1px solid #D8D8D8 !important;	background-color: #FFFFFF !important }

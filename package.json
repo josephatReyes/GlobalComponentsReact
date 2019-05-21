@@ -3,9 +3,26 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "bootstrap": "^4.3.1",
+    "google-map-react": "^1.1.4",
+    "jquery": "^3.4.0",
+    "moment": "^2.24.0",
+    "prop-types": "^15.7.2",
+    "rc-easyui": "^1.0.24",
     "react": "^16.8.5",
+    "react-animated-tree": "^1.0.10",
+    "react-bootstrap": "^1.0.0-beta.6",
+    "react-bootstrap-table-next": "^3.1.2",
+    "react-bootstrap-table2-paginator": "^2.0.6",
+    "react-bootstrap4-form-validation": "^1.0.10",
+    "react-contextmenu": "^2.11.0",
+    "react-data-menu": "^1.1.1",
+    "react-datetime": "^2.16.3",
     "react-dom": "^16.8.5",
-    "react-scripts": "2.1.8"
+    "react-flow-player": "^1.2.1",
+    "react-scripts": "2.1.8",
+    "react-treebeard": "^3.2.0",
+    "wowza-webrtc-client-react": "0.0.5"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -21,5 +38,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "react-styleguidist": "^9.0.8"
+  }
 }
