@@ -44,7 +44,7 @@ const NodeSelectable = props => {
 
 
 
-
+	console.log("PROPS_________>",props.children);
 	// console.log("Imprimiemdo props--->", props)
 const styleAlternative={
 	marginLeft: '0px'

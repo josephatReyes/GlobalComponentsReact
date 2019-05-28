@@ -1,0 +1,41 @@
+.red {
+	background: red;
+}
+
+.o-padding {
+	padding: 0px;
+}
+
+.o-margin {
+	margin: 0px !important;
+}
+
+#modal-alarms > .modal-content {
+	width: 900px !important;
+	max-width: 1000px !important;
+}
+
+#modal-alarms > .modal-content > .modal-header {
+	height: 45px;
+	padding: 0px;
+	display: flex;
+	align-items: center;
+}
+
+#modal-alarms > .modal-content > .modal-body {
+	padding: 0px;
+}
+
+.indicators-alarms {
+	height: 80px !important;
+}
+.title-modal-alarm {
+	height: 18px;
+	width: 246px;
+	color: #77787c;
+	font-size: 13px;
+	font-weight: 800;
+	line-height: 18px;
+    text-align: center;
+    text-transform: uppercase;
+}
