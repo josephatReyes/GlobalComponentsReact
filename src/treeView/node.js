@@ -1,4 +1,4 @@
-import React, { } from 'react';
+import React, {useState, useEffect } from 'react';
 
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 
@@ -37,42 +37,57 @@ import Popover from 'react-bootstrap/Popover';
 
 */
 const Node = props => {
+const [node, setNode] = useState(props)
 
 
+    useEffect(() => {
+        setNode(props);
+    }, [])
 
+    useEffect(() => {
+       
+    }, [node])
 
     // console.log("Imprimiemdo props--->", props)
 
+
+    const toggledSelf=()=>{
+        console.log(node);
+        let nodeAux= {...node};
+        nodeAux.toggled=!nodeAux.toggled;
+        setNode(nodeAux);
+            
+    }
     return (
 
         <div className="global-node">
-            <ContextMenuTrigger id={'' + props.idkey}>
+            <ContextMenuTrigger id={'' + node.idkey}>
                 <div className="node-ctn">
-                    <div className={props.circles ? "label" : "label fat"}
-                        onClick={() => { props.onceClick ? props.onceClick() : console.log("") }}
-                        onDoubleClick={(e) => { props.doubleClick ? props.doubleClick() : console.log("") }}
+                    <div className={node.circles ? "label" : "label fat"}
+                        onClick={ node.onceClick ? ()=>{node.onceClick(); toggledSelf()}: ()=>{toggledSelf(); console.log("")} }
+                        onDoubleClick={(e) => { node.doubleClick ? node.doubleClick() : console.log("") }}
                     >
-                        {props.iconClass !== '' ?
+                        {node.iconClass !== '' ?
                             <div className="iconos">
-                                <i className={props.iconClass.className} style={props.iconClass.style}></i>
+                                <i className={node.iconClass.className} style={node.iconClass.style}></i>
                             </div>
                             : ''}
-                        <span style={props.labelStyle} >
-                            {props.label}
+                        <span style={node.labelStyle} >
+                            {node.label}
                             <span>
-                                {props.leafs > 0 ? '(' + props.leafs + ')' : ''}
+                                {node.leafs > 0 ? '(' + node.leafs + ')' : ''}
                             </span>
                         </span>
                     </div>
-                    {props.circles ?
+                    {node.circles ?
                         <div className="circles">
-                            <div className={props.yellow === 0 ? 'circle yellow inactive' : 'circle yellow'}>{props.yellow.toString().length > 2 ? '99' : props.yellow}
-                                {(props.yellow.toString().length > 2) ?
+                            <div className={node.yellow === 0 ? 'circle yellow inactive' : 'circle yellow'}>{node.yellow.toString().length > 2 ? '99' : node.yellow}
+                                {(node.yellow.toString().length > 2) ?
                                     <OverlayTrigger
                                         trigger="hover"
                                         placement="right"
                                         overlay={
-                                            <Popover id={"popover-contained-yellow-" + props.yellow}>{props.yellow}</Popover>
+                                            <Popover id={"popover-contained-yellow-" + node.yellow}>{node.yellow}</Popover>
                                         }
                                     >
                                         <div className="badge-custom yellow"  >+</div>
@@ -81,13 +96,13 @@ const Node = props => {
                                     ''
                                 }
                             </div>
-                            <div className={props.green === 0 ? 'circle green inactive' : 'circle green'} >{props.green.toString().length > 2 ? '99' : props.green}
-                                {(props.green.toString().length > 2) ?
+                            <div className={node.green === 0 ? 'circle green inactive' : 'circle green'} >{node.green.toString().length > 2 ? '99' : node.green}
+                                {(node.green.toString().length > 2) ?
                                     <OverlayTrigger
                                         trigger="hover"
                                         placement="right"
                                         overlay={
-                                            <Popover id={"popover-contained-green-" + props.green}>{props.green}</Popover>
+                                            <Popover id={"popover-contained-green-" + node.green}>{node.green}</Popover>
                                         }
                                     >
                                         <div className="badge-custom green" >+</div>
@@ -96,13 +111,13 @@ const Node = props => {
                                     ''
                                 }
                             </div>
-                            <div className={props.red === 0 ? 'circle red inactive' : 'circle red'} >{props.red.toString().length > 2 ? '99' : props.red}
-                                {(props.red.toString().length > 2) ?
+                            <div className={node.red === 0 ? 'circle red inactive' : 'circle red'} >{node.red.toString().length > 2 ? '99' : node.red}
+                                {(node.red.toString().length > 2) ?
                                     <OverlayTrigger
                                         trigger="hover"
                                         placement="right"
                                         overlay={
-                                            <Popover id={"popover-contained-red-" + props.red}>{props.red}</Popover>
+                                            <Popover id={"popover-contained-red-" + node.red}>{node.red}</Popover>
                                         }
                                     >
                                         <div className="badge-custom red" >+</div>
@@ -110,13 +125,13 @@ const Node = props => {
                                     :
                                     ''}
                             </div>
-                            <div className={props.gray === 0 ? 'circle gray inactive' : 'circle gray'}>{props.gray.toString().length > 2 ? '99' : props.gray}
-                                {(props.gray.toString().length > 2) ?
+                            <div className={node.gray === 0 ? 'circle gray inactive' : 'circle gray'}>{node.gray.toString().length > 2 ? '99' : node.gray}
+                                {(node.gray.toString().length > 2) ?
                                     <OverlayTrigger
                                         trigger="hover"
                                         placement="right"
                                         overlay={
-                                            <Popover id={"popover-contained-gray-" + props.gray}>{props.gray}</Popover>
+                                            <Popover id={"popover-contained-gray-" + node.gray}>{node.gray}</Popover>
                                         }
                                     >
                                         <div className="badge-custom gray"  >+</div>
@@ -128,9 +143,9 @@ const Node = props => {
                         </div>
                         : <div className="circles light"></div>}
                     {
-                        props.hasChildren ?
-                            <div className="icon-ctn" onClick={props.toggleEvent ? () => { props.toggleEvent() } : null}>
-                                {props.icon ? !props.toggled ?
+                        node.hasChildren ?
+                            <div className="icon-ctn" onClick={(e)=>{e.stopPropagation(); toggledSelf()}}>
+                                {node.icon ? !node.toggled ?
                                     <div className="icon-open animate-zoom   "></div> :
                                     <div className="icon-close animate-opacity"></div> : ''}
                             </div>
@@ -140,28 +155,28 @@ const Node = props => {
                     }
                 </div>
             </ContextMenuTrigger>
-            <div className={props.toggled ? 'child visible-top ' : 'child visible-bottom'}>
+            <div className={node.toggled ? 'child visible-top ' : 'child visible-bottom'}>
                 {
-                    props.children
+                    node.children
                 }
             </div>
-            {props.menuCtx ? props.menuCtx.length > 0 ?
-                <ContextMenu id={'' + props.idkey} onClick={() => { alert("Ayuda") }}>
-                    {props.menuCtx ? props.menuCtx.length > 0 ? props.menuCtx.map((option, index) => {
+            {node.menuCtx ? node.menuCtx.length > 0 ?
+                <ContextMenu id={'' + node.idkey} onClick={() => { alert("Ayuda") }}>
+                    {node.menuCtx ? node.menuCtx.length > 0 ? node.menuCtx.map((option, index) => {
                         return (
-                            <MenuItem key={option + index} preventClose={false} data={{ option: option.id }} onClick={() => { props.eventMenu(option) }}>
+                            <MenuItem key={option + index} preventClose={false} data={{ option: option.id }} onClick={() => { node.eventMenu(option) }}>
                                 {option.id}
                             </MenuItem>
                         );
                     }) : '' : ''}
                     {
-                        props.subMenus ? props.subMenus.length > 0 ? props.subMenus.map((submenu, index) => {
+                        node.subMenus ? node.subMenus.length > 0 ? node.subMenus.map((submenu, index) => {
                             return (
                                 <SubMenu key={submenu.title + index} title={submenu.title} preventClose={true} >
                                     {submenu.items ? submenu.items.length > 0 ?
                                         submenu.items.map((itemSubmenu, indexSub) => {
                                             return (
-                                                <MenuItem key={itemSubmenu + indexSub} preventClose={false} data={{ subOption: itemSubmenu.title }} onClick={() => { props.eventSubMenu({ submenu: submenu.title, suboptionSeleceted: itemSubmenu.title }) }}>
+                                                <MenuItem key={itemSubmenu + indexSub} preventClose={false} data={{ subOption: itemSubmenu.title }} onClick={() => { node.eventSubMenu({ submenu: submenu.title, suboptionSeleceted: itemSubmenu.title }) }}>
                                                     {itemSubmenu.title}
                                                 </MenuItem>
                                             );
