@@ -41,10 +41,7 @@ const TreeView = props => {
                 onceClick={() => { props.onceClick ? props.onceClick(node) : console.log() }}
                 doubleClick={() => { props.doubleClick ? props.doubleClick(node) : console.log() }}
                 hasChildren={node.children ? node.children.length > 0 ? true : false : false}
-                toggleEvent={() => {
-                    node.toggled = !node.toggled;
-                    setChanges(!makechanges);
-                }}
+          
             >
                 {node.children ? node.children.length > 0 ?
                     node.children.map((nodeItem, index) => {
@@ -67,10 +64,7 @@ const TreeView = props => {
                                 eventSubMenu={(e) => { props.clickSubMenuCtx ? props.clickSubMenuCtx({ event: e, node: nodeItem }) : console.log() }}
                                 onceClick={() => { props.onceClick ? props.onceClick(nodeItem) : console.log() }}
                                 doubleClick={() => { props.doubleClick ? props.doubleClick(nodeItem) : console.log() }}
-                                toggleEvent={() => {
-                                    nodeItem.toggled = !nodeItem.toggled;
-                                    setChanges(!makechanges);
-                                }}
+                               
                             >
                                 {nodeItem.children ?
                                     nodeItem.children.map((leaf, index) => {
@@ -122,8 +116,7 @@ const TreeView = props => {
                         eventMenu={(e) => { props.clickMenuCtx ? props.clickMenuCtx({ event: e, node: item }) : console.log() }}
                         eventSubMenu={(e) => { props.clickSubMenuCtx ? props.clickSubMenuCtx({ event: e, node: item }) : console.log() }}
                         rightEvent={() => { console.log("Right Event") }}
-                        toggleEvent={() => { toggleFather(item, index) }
-                        }
+               
                         icon={item.withIcon}
                     >
                         {
