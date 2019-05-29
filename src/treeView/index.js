@@ -98,36 +98,7 @@ const TreeView = props => {
         <div className="global-ctn">
             {data.map((item, index) => {
                 return (
-                    <Node label={item.name} key={item.name + index} idkey={item.name + index}
-                        toggled={item.toggled}
-                        circles={item.withCircles}
-                        red={item.red}
-                        iconClass={item.icon ? item.icon : ''}
-                        yellow={item.yellow}
-                        green={item.green}
-                        gray={item.gray}
-                        onceClick={() => { props.onceClick ? props.onceClick(item) : console.log() }}
-                        doubleClick={() => { props.doubleClick ? props.doubleClick(item) : console.log() }}
-                        hasChildren={item.children ? item.children.length > 0 ? true : false : false}
-                        leafs={item.children ? item.children.length : 0}
-                        labelStyle={item.labelStyle}
-                        menuCtx={item.menuContext ? item.menuContext.length > 0 ? item.menuContext : [] : []}
-                        subMenus={item.subMenus ? item.subMenus.length > 0 ? item.subMenus : [] : []}
-                        eventMenu={(e) => { props.clickMenuCtx ? props.clickMenuCtx({ event: e, node: item }) : console.log() }}
-                        eventSubMenu={(e) => { props.clickSubMenuCtx ? props.clickSubMenuCtx({ event: e, node: item }) : console.log() }}
-                        rightEvent={() => { console.log("Right Event") }}
-               
-                        icon={item.withIcon}
-                    >
-                        {
-                            item.children.map((newitem, index) => {
-                                return (
-                                    <div key={newitem.name + index}>
-                                        {drawNodes(newitem)}
-                                    </div>
-                                )
-                            })}
-                    </Node>
+                  drawNodes(item)
                 );
             })}
         </div>
