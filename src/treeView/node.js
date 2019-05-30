@@ -74,9 +74,22 @@ const [node, setNode] = useState(props)
                             : ''}
                         <span style={node.labelStyle} >
                             {node.label}
+
+                            {node.circles?
+                            
+                            
                             <span>
-                                {node.leafs > 0 ? '(' + node.leafs + ')' : ''}
-                            </span>
+                            {'(' + (node.red + node.green + node.yellow + node.gray ) + ')'}
+                        </span>
+
+                        
+                            :
+                            
+                            <span>
+                            {node.leafs > 0 ? '(' + node.leafs + ')' : ''}
+                        </span>
+                            }
+                        
                         </span>
                     </div>
                     {node.circles ?

@@ -24,6 +24,56 @@ import ModalAlarm from './modal-alarms';
  * @see  <img width="120px" src="https://www.rig.net/wp-content/uploads/2019/01/cropped-Rignet_Logo2x.png"
  */
 
+const DrawHeader=props=>{
+const [firstTime, SetFirstime]=useState(true);
+const [text, setText] = useState("")
+
+useEffect(()=>{
+
+if(text==="" && !firstTime){
+	props.doSearch(text);
+}
+}, [text])
+const handleText=(e)=>{
+
+	const value = e.target.value;
+	const name = e.target.name;
+	if (name === 'searchText') {
+		SetFirstime(false);
+		setText(value);
+	}
+}
+
+const searchInData=e=>{
+	console.log(e);
+
+    if (e.charCode == 13) {
+      props.doSearch(text);
+      }
+      if (e.keyCode == 13) {
+		props.doSearch(text);
+      }
+}
+return(
+	<div className="header">
+				<HeaderContainer />
+
+				<Form.Control
+					type="text"
+					placeholder="search"
+					name="searchText"
+			value={text}
+			onChange={(e)=>{handleText(e)}}
+			onKeyPress={(e)=>{searchInData(e)}}
+
+				/>
+
+				<UserController />
+			</div>	
+);
+
+}
+
 function App() {
 	const DATA_TREE = [
 		{
@@ -438,6 +488,9 @@ function App() {
 		{ name: 'specie', keyField: 'species' },
 		{ name: 'Gender', keyField: 'gender' }
 	]);
+
+
+
 	const [ labels, setLabels ] = useState([]);
 	const [ placeholders, setPlaceHolders ] = useState([]);
 	const [ selectType, setSelectType ] = useState('inputText');
@@ -455,14 +508,14 @@ function App() {
 
 	const options = [ 'blue', 'red', 'green', 'yellow' ];
 	useEffect(() => {
-		console.log(dataToDisplay);
-		setDataToDisplay(DATA);
+	//	console.log(dataToDisplay);
+	setDataToDisplay(DATA);
 
 	}, []);
 	useEffect(
 		() => {
-			setDataToDisplay(searchInObject(searchText, DATA));
-			console.log('DATA CONSTANTE->', DATA_TREE);
+			//setDataToDisplay(searchInObject(searchText, DATA));
+		//	console.log('DATA CONSTANTE->', DATA_TREE);
 			// console.log(searchText);
 			// console.log(dataToDisplay);
 		},
@@ -524,6 +577,11 @@ function App() {
 	const handleSelectionChange = (selection) => {
 		// this.setState({ selection: selection })
 	};
+
+	const doSearch=(text)=>{
+
+		setDataToDisplay(searchInObject(text, DATA));
+	}
 	const searchInNodes = (criteria, node, apc) => {
 		for (let nodeItem in node) {
 			if (nodeItem.toString().toLowerCase() == 'name') {
@@ -543,8 +601,13 @@ function App() {
 	};
 
 	const searchInObject = (criteria, data) => {
+		console.log("----->",criteria,">_-----", data)
+
+		
 		if (criteria != '') {
-			let auxData = data.filter((dataItem) => {
+			console.log("Dentro del if", criteria)
+			let dataCopy= [... data];
+			let auxData = dataCopy.filter((dataItem) => {
 				let flagPrincipalNode = false;
 				for (let dataIt in dataItem) {
 					if (dataIt == 'name' && dataItem[dataIt].toLowerCase().includes(criteria.toLowerCase()))
@@ -568,21 +631,21 @@ function App() {
 						let flagEntity = false;
 						if (dataCustomers.children && dataCustomers.children.length != 0 && !flagCustomerNode) {
 							//Filtra por entity
-							let arrayEntitys = dataCustomers.children.filter((dataEntity) => {
+						/* 	let arrayEntitys = dataCustomers.children.filter((dataEntity) => {
 								return searchInNodes(criteria, dataEntity, false);
-							});
-							dataCustomers.children = arrayEntitys;
+							}); */
+							//dataCustomers.children = arrayEntitys;
 
 							//No le importan las entitys
-							// dataCustomers.children.forEach( dataEntity => {
-							//   flagEntity = searchInNodes(criteria,dataEntity,false)
-							// })
+							 dataCustomers.children.forEach( dataEntity => {
+							   flagEntity = searchInNodes(criteria,dataEntity,false)
+							 })
 						}
 						// Filtra por entity
-						return dataCustomers.children.length != 0 || flagCustomerNode;
+						//return dataCustomers.children.length != 0 || flagCustomerNode;
 
 						//No le importan entitys
-						// return (flagCustomerNode || flagEntity)
+						 return (flagCustomerNode || flagEntity)
 					});
 					dataItem.children = arrayCustomers;
 				}
@@ -647,90 +710,19 @@ function App() {
 		return value && value === password;
 	};
 
-	return (
-		<div className="App">
-			<div className="header">
-				<HeaderContainer />
+	const filterData=(e)=>{
+/* switch(e){
 
-				<Form.Control
-					type="text"
-					placeholder="search"
-					name="searchText"
-					value={searchText}
-					onChange={handleSearch}
-				/>
+	case 13:
+			setDataToDisplay(searchInObject(searchText, DATA));
 
-				<UserController />
-			</div>
-			<div className="body-content">
-				<div id="style-4" className="tree scrollbar">
-					{/**
-      
-       <Button type="submit" onClick={() => { addTab(); }}>Add Tab</Button>*/
-					/* 			<TreeViewSelectable
-							data={dataToDisplay}
-							onceClick={(res) => {
-								console.log('Clciked', res);
-							}}
-							doubleClick={(res) => {
-								console.log('Double clicked->', res);
-							}}
-							rightEvent={(res) => {
-								console.log('Right Click', res);
-							}}
-							clickMenuCtx={(res) => console.log('Menu ctx clicked-->', res)}
-							clickSubMenuCtx={(res) => console.log('SubMenu ctx clicked-->', res)}
-						/> */}
-
-					<TreeView
-						data={dataToDisplay}
-						onceClick={(res) => {
-							console.log('Clciked', res);
-						}}
-						doubleClick={(res) => {
-							console.log('Double clicked->', res);
-						}}
-						rightEvent={(res) => {
-							console.log('Right Click', res);
-						}}
-						clickMenuCtx={(res) => console.log('Menu ctx clicked-->', res)}
-						clickSubMenuCtx={(res) => console.log('SubMenu ctx clicked-->', res)}
-					/>
-				</div>
-
-				<div className="tab-controller-content">
-					<div className="container">
-						<Jumbotron>
-							<h1>Test of filters</h1>
-							<p>Click any header table to display a new filter</p>
-							<div className="container">
-								{/* 							<FilterComponent {...API_FILTER}> </FilterComponent>
-
-
-		<DataTable
-									clickOnHeader={(header) => {
-										switchFilters(header);
-									}}
-								/>
- */}
-
-								<ModalAlarm
-									showModalAlarm={showModalAlarm}
-									closeModal={() => {
-										setShowModalAlarm(!showModalAlarm);
-									}}
-								/>
-							</div>
-						</Jumbotron>
-					</div>
-				</div>
-			</div>
-		</div>
-	);
+	break;	
 }
+ */
+	}
 
-export default App;
 
+	
 const DATA = [
 	{
 		name: 'RigNet',
@@ -16439,3 +16431,78 @@ const DATA = [
 		]
 	}
 ];
+
+	return (
+		<div className="App">
+	<DrawHeader doSearch={doSearch} />
+			<div className="body-content">
+				<div id="style-4" className="tree scrollbar">
+					{/**
+      
+       <Button type="submit" onClick={() => { addTab(); }}>Add Tab</Button>*/
+					/* 			<TreeViewSelectable
+							data={dataToDisplay}
+							onceClick={(res) => {
+								console.log('Clciked', res);
+							}}
+							doubleClick={(res) => {
+								console.log('Double clicked->', res);
+							}}
+							rightEvent={(res) => {
+								console.log('Right Click', res);
+							}}
+							clickMenuCtx={(res) => console.log('Menu ctx clicked-->', res)}
+							clickSubMenuCtx={(res) => console.log('SubMenu ctx clicked-->', res)}
+						/> */}
+
+					<TreeView
+						data={dataToDisplay}
+						onceClick={(res) => {
+							console.log('Clciked', res);
+						}}
+						doubleClick={(res) => {
+							console.log('Double clicked->', res);
+						}}
+						rightEvent={(res) => {
+							console.log('Right Click', res);
+						}}
+						clickMenuCtx={(res) => console.log('Menu ctx clicked-->', res)}
+						clickSubMenuCtx={(res) => console.log('SubMenu ctx clicked-->', res)}
+					/>
+				</div>
+
+				<div className="tab-controller-content">
+					<div className="container">
+						<Jumbotron>
+							<h1>Test of filters</h1>
+							<p>Click any header table to display a new filter</p>
+							<div className="container">
+								{/* 							<FilterComponent {...API_FILTER}> </FilterComponent>
+
+
+		<DataTable
+									clickOnHeader={(header) => {
+										switchFilters(header);
+									}}
+								/>
+ */}
+
+								<ModalAlarm
+									showModalAlarm={showModalAlarm}
+									closeModal={() => {
+										setShowModalAlarm(!showModalAlarm);
+									}}
+								/>
+							</div>
+						</Jumbotron>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+
+
+	
+}
+
+export default App;
