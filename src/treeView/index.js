@@ -96,9 +96,34 @@ const TreeView = props => {
     let i = 0;
     return (
         <div className="global-ctn">
-            {data.map((item, index) => {
+            {data.map((nodeItem, index) => {
                 return (
-                  drawNodes(item)
+                    <Node key={nodeItem.name + index} label={nodeItem.name} idkey={"id-" + nodeItem.name + index}
+                                toggled={nodeItem.toggled}
+                                icon={nodeItem.withIcon}
+                                labelStyle={nodeItem.labelStyle}
+                                hasChildren={nodeItem.children ? nodeItem.children.length > 0 ? true : false : false}
+                                leafs={nodeItem.children ? nodeItem.children.length : 0}
+                                iconClass={nodeItem.icon ? nodeItem.icon : ''}
+                                circles={nodeItem.withCircles}
+                                yellow={nodeItem.yellow ? nodeItem.yellow : 0}
+                                green={nodeItem.green ? nodeItem.green : 0}
+                                red={nodeItem.red ? nodeItem.red : 0}
+                                gray={nodeItem.gray ? nodeItem.gray : 0}
+                                menuCtx={nodeItem.menuContext ? nodeItem.menuContext.length > 0 ? nodeItem.menuContext : [] : []}
+                                subMenus={nodeItem.subMenus ? nodeItem.subMenus.length > 0 ? nodeItem.subMenus : [] : []}
+                                eventMenu={(e) => { props.clickMenuCtx ? props.clickMenuCtx({ event: e, node: nodeItem }) : console.log() }}
+                                eventSubMenu={(e) => { props.clickSubMenuCtx ? props.clickSubMenuCtx({ event: e, node: nodeItem }) : console.log() }}
+                                onceClick={() => { props.onceClick ? props.onceClick(nodeItem) : console.log() }}
+                                doubleClick={() => { props.doubleClick ? props.doubleClick(nodeItem) : console.log() }}
+                               
+                            >
+                                {nodeItem.children ?
+                                    nodeItem.children.map((leaf, index) => {
+                                        return (drawNodes(leaf));
+                                    })
+                                    : ''}
+                            </Node>
                 );
             })}
         </div>
