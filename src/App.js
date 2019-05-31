@@ -525,11 +525,13 @@ function App() {
 	useEffect(() => {}, [ dataToDisplay ]);
 	///This is the expample of data structure for the
 	//Treeview Component
-	let data = DATA_TREE_SELECTABLE;
+	let data = DATA;
 
 	const handleClose = () => {
 		setShow(!show);
 	};
+
+
 
 	const addTab = () => {
 		let tabsAux = [ ...tabs ];
@@ -605,7 +607,7 @@ function App() {
 
 		
 		if (criteria != '') {
-			console.log("Dentro del if", criteria)
+		//	console.log("Dentro del if", criteria)
 			let dataCopy= [... data];
 			let auxData = dataCopy.filter((dataItem) => {
 				let flagPrincipalNode = false;

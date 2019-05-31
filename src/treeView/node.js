@@ -48,6 +48,10 @@ const [node, setNode] = useState(props)
        
     }, [node])
 
+
+    useEffect(()=>{
+        setNode(props)
+    },[props])
     // console.log("Imprimiemdo props--->", props)
 
 

@@ -11,6 +11,7 @@ const TreeView = props => {
     const [data, setData] = useState(props.data);
     const [makechanges, setChanges] = useState(false);
     useEffect(() => {
+        
         setData(props.data);
     }, [props.data])
     /**
