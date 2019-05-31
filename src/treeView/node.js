@@ -44,10 +44,10 @@ const [node, setNode] = useState(props)
         setNode(props);
     }, [])
 
-    useEffect(() => {
+ /*     useEffect(() => {
        
-    }, [node])
-
+    }, [node]) */
+ 
 
     useEffect(()=>{
         setNode(props)

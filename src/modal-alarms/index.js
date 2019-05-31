@@ -137,10 +137,6 @@ const ModalAlarm = (props) => {
 					<div className="row  o-padding o-margin comments-row  ">
 						<Comment owner={"Isaias"} isviewed={false} comment={"comentario test"} commentDate={"29-09-19"} />
                         <Comment owner={"Isaias"} isviewed={false} comment={"comentario test"} commentDate={"29-09-19"} />
-                        <Comment owner={"Isaias"} isviewed={false} comment={"comentario test"} commentDate={"29-09-19"} />
-
-						<Comment owner={"Isaias"} isviewed={false} comment={"comentario test"} commentDate={"29-09-19"} />
-
 					</div>
 				</div>
 			</Modal.Body>
