@@ -1,0 +1,324 @@
+.o-padding {
+	padding: 0px;
+}
+
+.o-margin {
+	margin: 0px !important;
+}
+
+#modal-comments > .modal-content {
+	width: 520px !important;
+	max-width: 520px !important;
+}
+
+#modal-comments > .modal-content > .modal-header {
+	height: 45px;
+	padding: 0px;
+	display: flex;
+	align-items: center;
+}
+
+#modal-comments > .modal-content > .modal-body {
+	padding: 0px;
+}
+
+.comments-box-input {
+	padding: 0px;
+}
+
+.comments-row-input {
+	width: 100%;
+	height: 110px;
+	padding: 5px 0;
+	border-bottom: 1px solid #d8d8d8;
+	background: #fff;
+	border-top: 1px solid #d8d8d8;
+}
+.title-modal-comments {
+	height: 18px;
+	width: 246px;
+	color: #77787c;
+	font-size: 13px;
+	font-weight: 800;
+	line-height: 18px;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.comments-box-container {
+	height: 580px;
+	max-height: 580px;
+}
+.comments-col-flex {
+	display: flex;
+	align-items: center;
+}
+.comment-col-form {
+	width: 100%;
+}
+
+#comments-col > form {
+	width: 100%;
+}
+
+#form-comments-input {
+	margin-bottom: 0px;
+	border: none;
+	display: flex;
+	justify-content: center;
+	border: none;
+	width: 100%;
+	position: relative;
+}
+
+#form-comments-input input {
+	width: 100%;
+	border: 1px solid black;
+  height: 38px;
+  padding-left: 10px;
+  padding-right: calc(45px)
+}
+
+#form-comments-input > .input-group {
+	position: relative;
+	border: none;
+}
+
+#form-comments-input > .arrow {
+	
+	position: absolute;
+	right: 0px;
+	width: 38px;
+	height: 38px;
+	background-image: url(../../src/assets/img/icon_left.svg);
+	background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  z-index: 10;
+  margin-right: 5px;
+}
+
+.comments-row {
+
+  
+	height: 80%;
+  background: #fafafa;
+
+  overflow: auto;
+ 
+}
+
+.comment-col-comments {
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	background: #fff;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	border: 1px solid #d8d8d8;
+	height: 111px;
+}
+
+.comment-ctn-comments {
+	margin-top: 5px;
+	width: calc(100% - 30px);
+	margin-left: 15px;
+	margin-right: 15px;
+	height: 131px;
+	background-color: transparent;
+	display: flex;
+	border: 1px solid #d8d8d8;
+	background: #fff;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+}
+
+.comment-ctn-comments > .img-ctn-comments {
+	height: 100%;
+	width: 50px;
+	background: transparent;
+	display: flex;
+	justify-content: center;
+	padding-top: 10px;
+}
+.comment-ctn-comments > .img-ctn-comments > .img-img-comments {
+	width: 38px;
+	height: 38px;
+	border-radius: 50%;
+	background-image: url(../../src/assets/img/default-user.jpg);
+	background-size: cover;
+	background-position: center;
+  background-repeat: no-repeat;
+
+}
+
+.comment-ctn-comments > .info-ctn-comments {
+	padding-top: 10px;
+	height: 100%;
+	width: calc(100% - 50px);
+	background: transparent;
+	display: flex;
+	flex-direction: column;
+}
+
+.comment-ctn-comments > .info-ctn-comments > .info-owner-comments {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.comment-ctn-comments > .info-ctn-comments > .info-owner-comments > .name {
+	color: #000;
+	font-weight: 600;
+	font-size: 13px;
+}
+
+.comment-ctn-comments > .info-ctn-comments > .info-owner-comments > .counter {
+	font-weight: 600;
+	font-size: 13px;
+	color: #000;
+	/* font-family: verdana; */
+}
+
+.comment-ctn-comments > .info-ctn-comments > .date {
+	padding-left: 10px;
+	margin-top: 5px;
+	width: 100%;
+	color: #b1b1b1;
+	/* padding-left: 3px; */
+	font-weight: normal;
+	line-height: 14px;
+	font-size: 10px;
+}
+
+.comment-ctn-comments > .info-ctn-comments > .message {
+	background: none repeat scroll 0 0 #eee;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	color: #000;
+
+	font-size: 13px;
+	width: calc(100% - 20px);
+	margin-left: 10px;
+	margin-top: 5px;
+	height: 35px;
+	display: flex;
+  align-items: center;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.comment-ctn-comments > .info-ctn-comments > .footer-ctn {
+  width: 100%;
+  background: transparent;
+  width: calc(100% - 20px);
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+
+
+.comment-ctn-comments > .info-ctn-comments > .footer-ctn > .like-ctn {
+  display: flex;
+  align-items: center;
+}
+
+
+.comment-ctn-comments > .info-ctn-comments > .footer-ctn > .like-ctn > .like {
+
+  width: 15px;
+	height: 15px;
+
+	background-image: url(../../src/assets/img/icon-viewed.svg);
+	background-size: cover;
+	background-position: center;
+  background-repeat: no-repeat;
+  margin-right: 5px;
+}
+
+.comment-ctn-comments > .info-ctn-comments > .footer-ctn > .like-ctn > .like-gray {
+
+  width: 15px;
+	height: 15px;
+	background-image: url(../../src/assets/img/icon-not-viewed.svg);
+	background-size: cover;
+	background-position: center;
+  background-repeat: no-repeat;
+	margin-right: 5px;
+	cursor: pointer;
+}
+.comment-ctn-comments > .info-ctn-comments > .footer-ctn > .like-ctn > .label {
+width: 150px;
+  color: #bfbfbf;
+}
+
+.comment-ctn-comments > .info-ctn-comments > .footer-ctn > .actions-ctn  {
+
+  display: flex;
+  flex-direction: row;
+
+}
+
+.comment-ctn-comments > .info-ctn-comments > .footer-ctn > .actions-ctn > .delete  {
+
+  width: 15px;
+  height: 15px;
+  background-image: url(../../src/assets/img/icon-delete.svg);
+	background-size: cover;
+	background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.comment-ctn-comments > .info-ctn-comments > .footer-ctn > .actions-ctn > .edit  {
+
+  width: 15px;
+  height: 15px;
+  background-image: url(../../src/assets/img/icon-edit.svg);
+	background-size: cover;
+	background-position: center;
+  background-repeat: no-repeat;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.comment-ctn-comments > .info-ctn-comments > .footer-ctn > .actions-ctn > .save  {
+
+  width: 15px;
+  height: 15px;
+  background-image: url(../../src/assets/img/icon-save.svg);
+	background-size: cover;
+	background-position: center;
+  background-repeat: no-repeat;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+
+/* scrool bar style */
+*/
+
+#comments-scroll::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+#comments-scroll::-webkit-scrollbar
+{
+	width: 1px;
+	background-color: #F5F5F5;
+}
+#comments-scroll::-webkit-scrollbar-thumb
+{
+	background-color: #eeee;
+}

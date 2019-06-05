@@ -20,7 +20,7 @@ const TreeView = props => {
      * @param {Node} node Is a node element will be rendered into the treeview
      * @returns {Nodes}  A map of node.children 
      */
-    const drawNodes = (node) => {
+    const drawNodes = (node,nameGlobalNode) => {
         //console.log("NODO->", node);
         return (
             <Node label={node.name} idkey={node.name}
@@ -42,7 +42,9 @@ const TreeView = props => {
                 onceClick={() => { props.onceClick ? props.onceClick(node) : console.log() }}
                 doubleClick={() => { props.doubleClick ? props.doubleClick(node) : console.log() }}
                 hasChildren={node.children ? node.children.length > 0 ? true : false : false}
-          
+                clickInStatus={(status) => { props.clickInStatus ? props.clickInStatus({status,nameGlobalNode,nameCustomerNode: node.name}) : console.log("eeeee") }}
+                status={props.status ? props.status : null}
+                nameNode={props.nameNode == node.name ? true : null}
             >
                 {node.children ? node.children.length > 0 ?
                     node.children.map((nodeItem, index) => {
@@ -65,7 +67,9 @@ const TreeView = props => {
                                 eventSubMenu={(e) => { props.clickSubMenuCtx ? props.clickSubMenuCtx({ event: e, node: nodeItem }) : console.log() }}
                                 onceClick={() => { props.onceClick ? props.onceClick(nodeItem) : console.log() }}
                                 doubleClick={() => { props.doubleClick ? props.doubleClick(nodeItem) : console.log() }}
-                               
+                                clickInStatus={(status) => { props.clickInStatus ? props.clickInStatus({status,nameGlobalNode,nameCustomerNode: node.name}) : console.log("eeeee") }}
+                                status={props.status ? props.status : null}
+                                nameNode={props.nameNode == nodeItem.name ? true : null}
                             >
                                 {nodeItem.children ?
                                     nodeItem.children.map((leaf, index) => {
@@ -97,7 +101,7 @@ const TreeView = props => {
     let i = 0;
     return (
         <div className="global-ctn">
-            {data.map((nodeItem, index) => {
+            {   data.map((nodeItem, index) => {
                 return (
                     <Node key={nodeItem.name + index} label={nodeItem.name} idkey={"id-" + nodeItem.name + index}
                                 toggled={nodeItem.toggled}
@@ -110,18 +114,20 @@ const TreeView = props => {
                                 yellow={nodeItem.yellow ? nodeItem.yellow : 0}
                                 green={nodeItem.green ? nodeItem.green : 0}
                                 red={nodeItem.red ? nodeItem.red : 0}
-                                gray={nodeItem.gray ? nodeItem.gray : 0}
+                                gray={nodeItem.gray ? nodeItem.gray : 0 }
                                 menuCtx={nodeItem.menuContext ? nodeItem.menuContext.length > 0 ? nodeItem.menuContext : [] : []}
                                 subMenus={nodeItem.subMenus ? nodeItem.subMenus.length > 0 ? nodeItem.subMenus : [] : []}
                                 eventMenu={(e) => { props.clickMenuCtx ? props.clickMenuCtx({ event: e, node: nodeItem }) : console.log() }}
                                 eventSubMenu={(e) => { props.clickSubMenuCtx ? props.clickSubMenuCtx({ event: e, node: nodeItem }) : console.log() }}
                                 onceClick={() => { props.onceClick ? props.onceClick(nodeItem) : console.log() }}
                                 doubleClick={() => { props.doubleClick ? props.doubleClick(nodeItem) : console.log() }}
-                               
+                                clickInStatus={(status) => { props.clickInStatus ? props.clickInStatus({status,nameGlobalNode: nodeItem.name,nameCustomerNode:""}) : console.log("eeeee") }}
+                                status={props.status ? props.status : null}
+                                nameNode={props.nameNode == nodeItem.name ? true : null}
                             >
                                 {nodeItem.children ?
                                     nodeItem.children.map((leaf, index) => {
-                                        return (drawNodes(leaf));
+                                        return (drawNodes(leaf,nodeItem.name));
                                     })
                                     : ''}
                             </Node>

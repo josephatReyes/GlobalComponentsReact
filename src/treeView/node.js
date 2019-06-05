@@ -34,7 +34,9 @@ import Popover from 'react-bootstrap/Popover';
 *@param {function}      eventSubMenu Event After a click on a submenu
 *@param {array}         menuCtx List of options into the menuContext
 *@param {Object}        labelStyle  Object with the Style for a label
-
+*@param {function}      clickInStatus Event after click in circles 
+*@param {string}        status the class to define style in circles
+*@param {boolean}       nameNode if the name is equal to the name of the filter it is true
 */
 const Node = props => {
 const [node, setNode] = useState(props)
@@ -62,13 +64,18 @@ const [node, setNode] = useState(props)
         setNode(nodeAux);
             
     }
+
+    const d = () =>{
+
+    }
+
     return (
 
         <div className="global-node">
-            <ContextMenuTrigger id={'' + node.idkey}>
-                <div className="node-ctn">
+            <ContextMenuTrigger id={"menuCtx"+node.idkey} onClick={() => { console.log("como que esta medio raro") }}>
+                <div className={ node.status ? node.status : "node-ctn" }>
                     <div className={node.circles ? "label" : "label fat"}
-                        onClick={ node.onceClick ? ()=>{node.onceClick(); toggledSelf()}: ()=>{toggledSelf(); console.log("")} }
+                        onClick = { node.onceClick ? ()=>{node.onceClick(); toggledSelf()}: ()=>{toggledSelf(); console.log("")} }
                         onDoubleClick={(e) => { node.doubleClick ? node.doubleClick() : console.log("") }}
                     >
                         {node.iconClass !== '' ?
@@ -76,7 +83,7 @@ const [node, setNode] = useState(props)
                                 <i className={node.iconClass.className} style={node.iconClass.style}></i>
                             </div>
                             : ''}
-                        <span style={node.labelStyle} >
+                        <span  style={node.labelStyle} >
                             {node.label}
 
                             {node.circles?
@@ -84,7 +91,7 @@ const [node, setNode] = useState(props)
                             
                             <span>
                             {'(' + (node.red + node.green + node.yellow + node.gray ) + ')'}
-                        </span>
+                            </span>
 
                         
                             :
@@ -98,7 +105,11 @@ const [node, setNode] = useState(props)
                     </div>
                     {node.circles ?
                         <div className="circles">
-                            <div className={node.yellow === 0 ? 'circle yellow inactive' : 'circle yellow'}>{node.yellow.toString().length > 2 ? '99' : node.yellow}
+                            <div className={ node.yellow === 0 || 
+                                node.status=='border-icon-unreachable' ||
+                                node.status=='border-icon-down' ||
+                                node.status=='border-icon-work' ||
+                                (!node.nameNode && node.status)  ? 'circle yellow inactive' : 'circle yellow'} onClick={node.yellow > 0 ? ()=> { node.status=='border-icon-warning' && node.nameNode ? props.clickInStatus('') : props.clickInStatus('icon-warning')} :  console.log() }>{node.yellow.toString().length > 2 ? '99' : node.yellow}
                                 {(node.yellow.toString().length > 2) ?
                                     <OverlayTrigger
                                         trigger="hover"
@@ -113,7 +124,11 @@ const [node, setNode] = useState(props)
                                     ''
                                 }
                             </div>
-                            <div className={node.green === 0 ? 'circle green inactive' : 'circle green'} >{node.green.toString().length > 2 ? '99' : node.green}
+                            <div className={node.green === 0 ||
+                                node.status=='border-icon-unreachable' ||
+                                node.status=='border-icon-down' ||
+                                node.status=='border-icon-warning' ||
+                                (!node.nameNode && node.status)  ? 'circle green inactive' : 'circle green'} onClick={node.green>0 ? () => { node.status=='border-icon-work' && node.nameNode ? props.clickInStatus('') : props.clickInStatus('icon-work')} : console.log() }>{node.green.toString().length > 2 ? '99' : node.green}
                                 {(node.green.toString().length > 2) ?
                                     <OverlayTrigger
                                         trigger="hover"
@@ -128,7 +143,11 @@ const [node, setNode] = useState(props)
                                     ''
                                 }
                             </div>
-                            <div className={node.red === 0 ? 'circle red inactive' : 'circle red'} >{node.red.toString().length > 2 ? '99' : node.red}
+                            <div className={node.red === 0 ||
+                                node.status=='border-icon-unreachable' ||
+                                node.status=='border-icon-work' ||
+                                node.status=='border-icon-warning' ||
+                                (!node.nameNode && node.status) ? 'circle red inactive' : 'circle red'} onClick={ node.red > 0 ? ()=> { node.status=='border-icon-down' && node.nameNode ? props.clickInStatus('') : props.clickInStatus('icon-down')} : console.log()}>{node.red.toString().length > 2 ? '99' : node.red}
                                 {(node.red.toString().length > 2) ?
                                     <OverlayTrigger
                                         trigger="hover"
@@ -142,7 +161,11 @@ const [node, setNode] = useState(props)
                                     :
                                     ''}
                             </div>
-                            <div className={node.gray === 0 ? 'circle gray inactive' : 'circle gray'}>{node.gray.toString().length > 2 ? '99' : node.gray}
+                            <div className={node.gray === 0 ||
+                                node.status=='border-icon-down' ||
+                                node.status=='border-icon-work' ||
+                                node.status=='border-icon-warning' ||
+                                (!node.nameNode && node.status) ? 'circle gray inactive' : 'circle gray'} onClick={ node.gray > 0 ? () =>  { node.status=='border-icon-unreachable' && node.nameNode ? props.clickInStatus('') : props.clickInStatus('icon-unreachable')} : console.log() }>{node.gray.toString().length > 2 ? '99' : node.gray}
                                 {(node.gray.toString().length > 2) ?
                                     <OverlayTrigger
                                         trigger="hover"
@@ -178,7 +201,7 @@ const [node, setNode] = useState(props)
                 }
             </div>
             {node.menuCtx ? node.menuCtx.length > 0 ?
-                <ContextMenu id={'' + node.idkey} onClick={() => { alert("Ayuda") }}>
+                <ContextMenu id={"menuCtx"+node.idkey} onClick={() => { console.log("como que esta medio raro") }}>
                     {node.menuCtx ? node.menuCtx.length > 0 ? node.menuCtx.map((option, index) => {
                         return (
                             <MenuItem key={option + index} preventClose={false} data={{ option: option.id }} onClick={() => { node.eventMenu(option) }}>

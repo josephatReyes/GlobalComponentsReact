@@ -1,0 +1,122 @@
+export const DATA_TRACKING=  [
+    {
+        status: { know: false, by: null, time: null },
+        _id: '5c7adb69f3868007254375ee',
+        monitor: 'Status',
+        value: 'Remote out of network.',
+        stateValue: 8,
+        icon: 'icon-down',
+        start: '2019-03-02T19:37:13.320Z',
+        refresh: '2019-03-05T17:54:30.237Z',
+        duration: 253036917,
+        durationString: '2 days 22 hours 17 minutes 17 seconds'
+    },
+    {
+        status: { know: false, by: null, time: null },
+        _id: '5c7eb7d6f38680072576b38b',
+        monitor: 'Status',
+        value: 'Remote is unreachable.',
+        stateValue: 12,
+        icon: 'icon-unreachable',
+        start: '2019-03-05T17:54:30.379Z',
+        refresh: '2019-03-05T17:58:16.485Z',
+        duration: 226106,
+        durationString: '3 minutes 46 seconds'
+    },
+    {
+        status: { know: false, by: null, time: null },
+        _id: '5c7eb8b8f38680072576c046',
+        monitor: 'Status',
+        value: 'Remote out of network.',
+        stateValue: 8,
+        icon: 'icon-down',
+        start: '2019-03-05T17:58:16.636Z',
+        refresh: '2019-04-09T14:26:08.598Z',
+        duration: 3011271962,
+        durationString: '1 month 3 days 20 hours 27 minutes 52 seconds'
+    },
+    {
+        status: { know: false, by: null, time: null },
+        _id: '5cacab81cc6df02786996b77',
+        monitor: 'Status',
+        value: 'No Alarms.',
+        stateValue: 1,
+        icon: 'icon-work',
+        start: '2019-04-09T14:26:08.764Z',
+        refresh: '2019-04-09T17:54:09.899Z',
+        duration: 12481135,
+        durationString: '3 hours 28 minutes 1 second'
+    },
+    {
+        status: { know: false, by: null, time: null },
+        _id: '5cacdc42cc6df027869aa99a',
+        monitor: 'Status',
+        value: 'CRC Errors.',
+        stateValue: 10,
+        icon: 'icon-warning',
+        start: '2019-04-09T17:54:10.116Z',
+        refresh: '2019-04-09T18:04:10.355Z',
+        duration: 600239,
+        durationString: '10 minutes'
+    },
+    {
+        status: { know: false, by: null, time: null },
+        _id: '5cacde9acc6df027869ab95c',
+        monitor: 'Status',
+        value: 'No Alarms.',
+        stateValue: 1,
+        icon: 'icon-work',
+        start: '2019-04-09T18:04:10.513Z',
+        refresh: '2019-04-09T18:44:08.872Z',
+        duration: 2398359,
+        durationString: '39 minutes 58 seconds'
+    },
+    {
+        status: { know: false, by: null, time: null },
+        _id: '5cace7f9cc6df027869af860',
+        monitor: 'Status',
+        value: 'Remote out of network.',
+        stateValue: 8,
+        icon: 'icon-down',
+        start: '2019-04-09T18:44:09.031Z',
+        refresh: '2019-04-09T18:48:09.507Z',
+        duration: 240476,
+        durationString: '4 minutes'
+    },
+    {
+        status: { know: false, by: null, time: null },
+        _id: '5cace8e9cc6df027869afeb6',
+        monitor: 'Status',
+        value: 'No Alarms.',
+        stateValue: 1,
+        icon: 'icon-work',
+        start: '2019-04-09T18:48:09.695Z',
+        refresh: '2019-04-09T19:11:10.176Z',
+        duration: 1380481,
+        durationString: '23 minutes 1 second'
+    },
+    {
+        status: { know: false, by: null, time: null },
+        _id: '5cacee4ecc6df027869b22fb',
+        monitor: 'Status',
+        value: 'Remote out of network.',
+        stateValue: 8,
+        icon: 'icon-down',
+        start: '2019-04-09T19:11:10.392Z',
+        refresh: '2019-05-02T18:54:11.668Z',
+        duration: 1986181276,
+        durationString: '22 days 23 hours 43 minutes 1 second'
+    },
+    {
+        status: { know: false, by: null, time: null },
+        _id: '5ccb3cd5a9865d52c3c336c7',
+        monitor: 'Status',
+        value: 'Remote is unreachable.',
+        stateValue: 12,
+        icon: 'icon-unreachable',
+        start: '2019-05-02T18:54:12.843Z',
+        refresh: '2019-06-04T15:33:12.036Z',
+        duration: 2839139193,
+        durationString: '1 month 1 day 20 hours 39 minutes'
+    }
+];

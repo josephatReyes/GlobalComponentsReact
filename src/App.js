@@ -17,6 +17,9 @@ import { ValidationForm, TextInput } from 'react-bootstrap4-form-validation';
 import TreeViewSelectable from './treeViewSelectable';
 import { DATA_TREE_SELECTABLE } from './dataTreeSelectable';
 import ModalAlarm from './modal-alarms';
+import ModalComments from './modal-comments';
+import { COMMENTS_DATA } from './CommentsDATA';
+import { DATA_TRACKING } from './EVENTS_TRACKING_DATA';
 
 /**
  * @file Global Components.
@@ -496,20 +499,22 @@ function App() {
 	const [ selectType, setSelectType ] = useState('inputText');
 
 	let TABS = DATA_TABS;
-	const [ dataToDisplay, setDataToDisplay ] = useState([]);
+	///_____AQUI HAY CAMBIOS
+	const [ dataToDisplay, setDataToDisplay ] = useState({DATA:[],status:null,name:null});
 	const [ tabs, setTabs ] = useState(TABS);
 	const [ activeTab, setActiveTab ] = useState(TABS[0].title);
 	const [ show, setShow ] = useState(true);
 	const [ searchText, setSearchText ] = useState('');
 
-	//For Modal alamr
+	//For Modal alarm
 
-	const [ showModalAlarm, setShowModalAlarm ] = useState(false);
+	const [ showModalAlarm, setShowModalAlarm ] = useState(true);
 
 	const options = [ 'blue', 'red', 'green', 'yellow' ];
 	useEffect(() => {
 	//	console.log(dataToDisplay);
-	setDataToDisplay(DATA);
+	///_____AQUI HAY CAMBIOS
+	setDataToDisplay({DATA,status:null,name:null});
 
 	}, []);
 	useEffect(
@@ -581,9 +586,41 @@ function App() {
 	};
 
 	const doSearch=(text)=>{
+///_____AQUI HAY CAMBIOS
+		setDataToDisplay({DATA:searchInObject(text, DATA),status:null,name:null});
 
-		setDataToDisplay(searchInObject(text, DATA));
 	}
+
+	///_____AQUI HAY CAMBIOS
+	//Para filtrar por colores
+	const doFilter=(criteria,nameGlobalNode,nameCustomerNode)=>{
+		let status='';
+		if(criteria!='')status='border-'+criteria;
+		let name = nameGlobalNode;
+		if(nameCustomerNode!='')name=nameCustomerNode;
+		setDataToDisplay({DATA:searchInObjectByStatus(criteria, DATA,nameGlobalNode,nameCustomerNode),status,name});
+	}
+	///_____AQUI HAY CAMBIOS
+	const searchInNodesByStatus = (criteria, node, apc) => {
+		for (let nodeItem in node) {
+			if(node[nodeItem].className){
+				if (node[nodeItem].className.toString().toLowerCase().includes(criteria.toString().toLowerCase())) {
+					apc = true;
+				}	
+			}
+
+			if (node[nodeItem].length && typeof node[nodeItem] != 'string') {
+				node[nodeItem].forEach( nodeItemObject => {
+					apc = searchInNodes(criteria, nodeItemObject, apc);
+				});
+			}
+		}
+
+		return apc;
+	};
+
+	//Para el buscador
+
 	const searchInNodes = (criteria, node, apc) => {
 		for (let nodeItem in node) {
 			if (nodeItem.toString().toLowerCase() == 'name') {
@@ -659,6 +696,68 @@ function App() {
 			return data;
 		}
 	};
+
+	
+	///_____AQUI HAY CAMBIOS
+	const searchInObjectByStatus = (criteria, data , nameGlobalNode, nameCustomerNode) => {
+		if(criteria!=''){
+			let auxData = data.filter( dataItem =>{
+					let flagPrincipalNode = false;
+					for(let dataIt in dataItem){
+							if(dataIt == 'name' && dataItem[dataIt].toLowerCase().includes(nameGlobalNode.toLowerCase()))flagPrincipalNode = true;
+					}
+					if(dataItem.children && dataItem.children.length != 0 && flagPrincipalNode){
+
+						let arrayCustomers = dataItem.children.filter( dataCustomers => {
+							let flagCustomerNode = false;
+							for(let dataIt in dataCustomers){
+								if(dataIt == 'name' && dataCustomers[dataIt].toLowerCase().includes(nameCustomerNode.toLowerCase()))flagCustomerNode = true;
+								
+							}
+
+							if(dataCustomers.children && dataCustomers.children.length != 0 && flagCustomerNode){
+										let arrayEntitys = dataCustomers.children.filter( dataEntity => {
+											
+											if(dataEntity.children && dataEntity.children.length!=0){
+										
+								
+												let arraySites = dataEntity.children.filter( siteEntity =>{
+													if(siteEntity.children && siteEntity.children.length!=0){
+														let arrayDevices = siteEntity.children.filter( deviceEntity => {
+															return searchInNodesByStatus(criteria,deviceEntity,false);
+														})
+														siteEntity.children = arrayDevices;
+													}
+													return (siteEntity.children.length !=0 )
+												})
+
+
+												dataEntity.children = arraySites;
+											}
+											return (dataEntity.children.length !=0 )
+										})
+										dataCustomers.children = arrayEntitys;     
+									}
+
+									if(nameCustomerNode==""){
+										return (dataCustomers.children.length != 0)
+									}else{
+										return (flagCustomerNode)
+									}
+							})
+							
+							
+							dataItem.children = arrayCustomers;
+					}
+					return (flagPrincipalNode)
+				
+			})
+			return auxData
+	}else{
+			return data
+	}
+
+};
 
 	const switchFilters = (header) => {
 		switch (header.keyField) {
@@ -16457,8 +16556,11 @@ const DATA = [
 							clickSubMenuCtx={(res) => console.log('SubMenu ctx clicked-->', res)}
 						/> */}
 
+
+
 					<TreeView
-						data={dataToDisplay}
+				/* _____AQUI HAY CAMBIOS */
+						data={dataToDisplay.DATA}
 						onceClick={(res) => {
 							console.log('Clciked', res);
 						}}
@@ -16470,7 +16572,11 @@ const DATA = [
 						}}
 						clickMenuCtx={(res) => console.log('Menu ctx clicked-->', res)}
 						clickSubMenuCtx={(res) => console.log('SubMenu ctx clicked-->', res)}
-					/>
+				/*_____AQUI HAY CAMBIOS */
+						clickInStatus={res => doFilter(res.status,res.nameGlobalNode,res.nameCustomerNode)}
+						status={dataToDisplay.status}
+						nameNode={dataToDisplay.name}
+				/>
 				</div>
 
 				<div className="tab-controller-content">
@@ -16491,10 +16597,32 @@ const DATA = [
 
 								<ModalAlarm
 									showModalAlarm={showModalAlarm}
+									tracking={DATA_TRACKING}
+									comments= {COMMENTS_DATA}
+									site={"iDirect-X5-68349"}
+									status={"Remote out of network"}
+									startDate={"02/03/19 13:37"}
+									endDate={"14d 1h 46m"}
+									index={"78"}
 									closeModal={() => {
 										setShowModalAlarm(!showModalAlarm);
 									}}
 								/>
+
+	{/* 							<ModalComments
+								onSaveComment={(comment)=>{console.log("new comment to save is", comment)}}
+								onEditComment={(comment)=>{console.log("on edit Comment", comment)}}
+								onDeleteComment={id=>console.log("delete comment", id)}
+								index={10}
+									showModalComments={showModalAlarm}
+									comments= {COMMENTS_DATA}
+									closeModal={() => {
+										setShowModalAlarm(!showModalAlarm);
+									}}
+								/>			
+ */}
+
+
 							</div>
 						</Jumbotron>
 					</div>

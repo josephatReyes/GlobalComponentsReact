@@ -53,13 +53,11 @@ margin-top: 10px;
   justify-content: space-between;
 
 }
-.input-group{
+/* .input-group{
   position: relative;
-}
-.input-group:after{
-
+} */
+/* .input-group:after{
   content:'';
-  
   position: absolute;
   background: transparent;
   z-index: 10;
@@ -74,9 +72,9 @@ margin-top: 10px;
  
 
 }
+ */
 
-
-.input-group-append{
+/* .input-group-append{
     border: none;
 }
 .input-group-text:focus{
@@ -88,7 +86,7 @@ border-color:transparent;
 
 }
 
-
+ */
 #inputForm{
     width:100%;
 }
