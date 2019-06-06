@@ -16,7 +16,20 @@
 	padding: 0px;
 	display: flex;
 	align-items: center;
+	background: #E9E9E9;
 }
+
+#modal-comments > .modal-content > .modal-header > div {
+width: 100%;
+background: transparent;
+	}
+
+	
+#modal-comments > .modal-content > .modal-header > button {
+position: absolute;
+right: 10px;
+}
+
 
 #modal-comments > .modal-content > .modal-body {
 	padding: 0px;

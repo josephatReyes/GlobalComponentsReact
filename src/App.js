@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
 import './App.css';
 
 import Button from 'react-bootstrap/Button';
@@ -16595,7 +16594,7 @@ const DATA = [
 								/>
  */}
 
-								<ModalAlarm
+						{/* 		<ModalAlarm
 									showModalAlarm={showModalAlarm}
 									tracking={DATA_TRACKING}
 									comments= {COMMENTS_DATA}
@@ -16607,9 +16606,9 @@ const DATA = [
 									closeModal={() => {
 										setShowModalAlarm(!showModalAlarm);
 									}}
-								/>
+								/> */}
 
-	{/* 							<ModalComments
+ 							<ModalComments
 								onSaveComment={(comment)=>{console.log("new comment to save is", comment)}}
 								onEditComment={(comment)=>{console.log("on edit Comment", comment)}}
 								onDeleteComment={id=>console.log("delete comment", id)}
@@ -16620,7 +16619,8 @@ const DATA = [
 										setShowModalAlarm(!showModalAlarm);
 									}}
 								/>			
- */}
+ 
+ 
 
 
 							</div>
