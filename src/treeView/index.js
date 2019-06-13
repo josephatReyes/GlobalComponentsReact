@@ -42,9 +42,10 @@ const TreeView = props => {
                 onceClick={() => { props.onceClick ? props.onceClick(node) : console.log() }}
                 doubleClick={() => { props.doubleClick ? props.doubleClick(node) : console.log() }}
                 hasChildren={node.children ? node.children.length > 0 ? true : false : false}
-                clickInStatus={(status) => { props.clickInStatus ? props.clickInStatus({status,nameGlobalNode,nameCustomerNode: node.name}) : console.log("eeeee") }}
+                clickInStatus={(status,classNameFilter) => { props.clickInStatus ? props.clickInStatus({status,nameGlobalNode,nameCustomerNode: node.name ,classNameFilter}) : console.log("eeeee") }}
                 status={props.status ? props.status : null}
                 nameNode={props.nameNode == node.name ? true : null}
+                classNameFilter = { props.classNameFilter  ? props.classNameFilter : null }
             >
                 {node.children ? node.children.length > 0 ?
                     node.children.map((nodeItem, index) => {
@@ -67,9 +68,10 @@ const TreeView = props => {
                                 eventSubMenu={(e) => { props.clickSubMenuCtx ? props.clickSubMenuCtx({ event: e, node: nodeItem }) : console.log() }}
                                 onceClick={() => { props.onceClick ? props.onceClick(nodeItem) : console.log() }}
                                 doubleClick={() => { props.doubleClick ? props.doubleClick(nodeItem) : console.log() }}
-                                clickInStatus={(status) => { props.clickInStatus ? props.clickInStatus({status,nameGlobalNode,nameCustomerNode: node.name}) : console.log("eeeee") }}
+                                clickInStatus={(status,classNameFilter) => { props.clickInStatus ? props.clickInStatus({status,nameGlobalNode,nameCustomerNode: node.name,classNameFilter}) : console.log("eeeee") }}
                                 status={props.status ? props.status : null}
                                 nameNode={props.nameNode == nodeItem.name ? true : null}
+                                classNameFilter = { props.classNameFilter  ? props.classNameFilter : null }
                             >
                                 {nodeItem.children ?
                                     nodeItem.children.map((leaf, index) => {
@@ -121,9 +123,10 @@ const TreeView = props => {
                                 eventSubMenu={(e) => { props.clickSubMenuCtx ? props.clickSubMenuCtx({ event: e, node: nodeItem }) : console.log() }}
                                 onceClick={() => { props.onceClick ? props.onceClick(nodeItem) : console.log() }}
                                 doubleClick={() => { props.doubleClick ? props.doubleClick(nodeItem) : console.log() }}
-                                clickInStatus={(status) => { props.clickInStatus ? props.clickInStatus({status,nameGlobalNode: nodeItem.name,nameCustomerNode:""}) : console.log("eeeee") }}
+                                clickInStatus={(status,classNameFilter) => { props.clickInStatus ? props.clickInStatus({status,nameGlobalNode: nodeItem.name,nameCustomerNode:"",classNameFilter}) : console.log("eeeee") }}
                                 status={props.status ? props.status : null}
                                 nameNode={props.nameNode == nodeItem.name ? true : null}
+                                classNameFilter = { props.classNameFilter  ? props.classNameFilter : null }
                             >
                                 {nodeItem.children ?
                                     nodeItem.children.map((leaf, index) => {

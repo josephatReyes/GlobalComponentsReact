@@ -73,7 +73,7 @@ const [node, setNode] = useState(props)
 
         <div className="global-node">
             <ContextMenuTrigger id={"menuCtx"+node.idkey} onClick={() => { console.log("como que esta medio raro") }}>
-                <div className={ node.status ? node.status : "node-ctn" }>
+                <div className={ node.classNameFilter ? node.classNameFilter : "node-ctn" }>
                     <div className={node.circles ? "label" : "label fat"}
                         onClick = { node.onceClick ? ()=>{node.onceClick(); toggledSelf()}: ()=>{toggledSelf(); console.log("")} }
                         onDoubleClick={(e) => { node.doubleClick ? node.doubleClick() : console.log("") }}
@@ -106,10 +106,10 @@ const [node, setNode] = useState(props)
                     {node.circles ?
                         <div className="circles">
                             <div className={ node.yellow === 0 || 
-                                node.status=='border-icon-unreachable' ||
-                                node.status=='border-icon-down' ||
-                                node.status=='border-icon-work' ||
-                                (!node.nameNode && node.status)  ? 'circle yellow inactive' : 'circle yellow'} onClick={node.yellow > 0 ? ()=> { node.status=='border-icon-warning' && node.nameNode ? props.clickInStatus('') : props.clickInStatus('icon-warning')} :  console.log() }>{node.yellow.toString().length > 2 ? '99' : node.yellow}
+                                props.status==2 ||
+                                props.status==3 ||
+                                props.status==4 ||
+                                (!node.nameNode && props.status)  ? 'circle yellow inactive' : 'circle yellow'} onClick={node.yellow > 0 ? ()=> { props.status==1 && node.nameNode ? props.clickInStatus(0,'') : props.clickInStatus(1,'border-icon-warning')} :  console.log() }>{node.yellow.toString().length > 2 ? '99' : node.yellow}
                                 {(node.yellow.toString().length > 2) ?
                                     <OverlayTrigger
                                         trigger="hover"
@@ -125,10 +125,10 @@ const [node, setNode] = useState(props)
                                 }
                             </div>
                             <div className={node.green === 0 ||
-                                node.status=='border-icon-unreachable' ||
-                                node.status=='border-icon-down' ||
-                                node.status=='border-icon-warning' ||
-                                (!node.nameNode && node.status)  ? 'circle green inactive' : 'circle green'} onClick={node.green>0 ? () => { node.status=='border-icon-work' && node.nameNode ? props.clickInStatus('') : props.clickInStatus('icon-work')} : console.log() }>{node.green.toString().length > 2 ? '99' : node.green}
+                                props.status==1 ||
+                                props.status==3 ||
+                                props.status==4 ||
+                                (!node.nameNode && props.status)  ? 'circle green inactive' : 'circle green'} onClick={node.green>0 ? () => { props.status==2 && node.nameNode ? props.clickInStatus(0,'') : props.clickInStatus(2,'border-icon-work')} : console.log() }>{node.green.toString().length > 2 ? '99' : node.green}
                                 {(node.green.toString().length > 2) ?
                                     <OverlayTrigger
                                         trigger="hover"
@@ -144,10 +144,10 @@ const [node, setNode] = useState(props)
                                 }
                             </div>
                             <div className={node.red === 0 ||
-                                node.status=='border-icon-unreachable' ||
-                                node.status=='border-icon-work' ||
-                                node.status=='border-icon-warning' ||
-                                (!node.nameNode && node.status) ? 'circle red inactive' : 'circle red'} onClick={ node.red > 0 ? ()=> { node.status=='border-icon-down' && node.nameNode ? props.clickInStatus('') : props.clickInStatus('icon-down')} : console.log()}>{node.red.toString().length > 2 ? '99' : node.red}
+                                props.status==1 ||
+                                props.status==2 ||
+                                props.status==4 ||
+                                (!node.nameNode && props.status) ? 'circle red inactive' : 'circle red'} onClick={ node.red > 0 ? ()=> { props.status==3 && node.nameNode ? props.clickInStatus(0,'') : props.clickInStatus(3,'border-icon-down')} : console.log()}>{node.red.toString().length > 2 ? '99' : node.red}
                                 {(node.red.toString().length > 2) ?
                                     <OverlayTrigger
                                         trigger="hover"
@@ -162,10 +162,10 @@ const [node, setNode] = useState(props)
                                     ''}
                             </div>
                             <div className={node.gray === 0 ||
-                                node.status=='border-icon-down' ||
-                                node.status=='border-icon-work' ||
-                                node.status=='border-icon-warning' ||
-                                (!node.nameNode && node.status) ? 'circle gray inactive' : 'circle gray'} onClick={ node.gray > 0 ? () =>  { node.status=='border-icon-unreachable' && node.nameNode ? props.clickInStatus('') : props.clickInStatus('icon-unreachable')} : console.log() }>{node.gray.toString().length > 2 ? '99' : node.gray}
+                                props.status==1 ||
+                                props.status==2 ||
+                                props.status==3 ||
+                                (!node.nameNode && props.status) ? 'circle gray inactive' : 'circle gray'} onClick={ node.gray > 0 ? () =>  { props.status == 4 && node.nameNode ? props.clickInStatus(0,'') : props.clickInStatus(4,'border-icon-unreachable')} : console.log() }>{node.gray.toString().length > 2 ? '99' : node.gray}
                                 {(node.gray.toString().length > 2) ?
                                     <OverlayTrigger
                                         trigger="hover"
@@ -201,7 +201,7 @@ const [node, setNode] = useState(props)
                 }
             </div>
             {node.menuCtx ? node.menuCtx.length > 0 ?
-                <ContextMenu id={"menuCtx"+node.idkey} onClick={() => { console.log("como que esta medio raro") }}>
+                <ContextMenu id={'' + node.idkey} onClick={() => { alert("Ayuda") }}>
                     {node.menuCtx ? node.menuCtx.length > 0 ? node.menuCtx.map((option, index) => {
                         return (
                             <MenuItem key={option + index} preventClose={false} data={{ option: option.id }} onClick={() => { node.eventMenu(option) }}>
