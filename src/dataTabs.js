@@ -21,7 +21,29 @@ export const DATA_TABS=[{
   iconName: "fas fa-video",
   content: "Text example for camera 2", icon: "icon-camera", closeable: true }
     ,
-  { title: "Camera 3",
+  { title: "Camera 6",
+  iconName: "fas fa-video",
+  content: "Nothing to show", icon: "icon-camera", closeable: true },
+  { title: "Camera 7",
+  iconName: "fas fa-video",
+  content: "Nothing to show", icon: "icon-camera", closeable: true },
+  { title: "Camera 8",
+  iconName: "fas fa-video",
+  content: "Nothing to show", icon: "icon-camera", closeable: true },
+  { title: "Camera 10",
+  iconName: "fas fa-video",
+  content: "Nothing to show", icon: "icon-camera", closeable: true },
+  { title: "Camera 13",
+  iconName: "fas fa-video",
+  content: "Nothing to show", icon: "icon-camera", closeable: true },  { title: "Camera 3",
   iconName: "fas fa-video",
   content: "Nothing to show", icon: "icon-camera", closeable: true }
+  ,  { title: "Camera 14",
+  iconName: "fas fa-video",
+  content: "Nothing to show", icon: "icon-camera", closeable: true }
+  ,  { title: "Camer 53",
+  iconName: "fas fa-video",
+  content: "Nothing to show", icon: "icon-camera", closeable: true }
+
+
   ]

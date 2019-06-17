@@ -27,6 +27,8 @@ const [tabs, setTabs]= useState([]);
 const [activeTab, setActiveTab]= useState(props.activeTab);
 const [lastTabSelected, setLastTabSelected]= useState(props.activeTab);
 const [showControls, setShowControls]= useState(false);
+
+console.log("SHOW CONTROLS",showControls)
 const closeTab = (e, tab, index) => {
   e.stopPropagation();
   if (tab.closeable) {
@@ -86,24 +88,38 @@ const scrollRight = (elements, change, duration) => {
   animateScroll();
 }
 
-useEffect(() => {
-//Update the document title using the browser API
-  setTabs(props.tabs);
+useEffect(()=>{},[showControls])
 
+useEffect(()=>{
+
+  console.log("NUEVA TAB")
   var nav = document.getElementsByClassName("nav");
   if(nav){
+
+    console.log("TABS", tabs)
 //cada caja de la camara mide 134px su sumatoria debe ser menor al clienWidth del nav para que 
 // caso contrario se muestran los controles
 let maxWidth= nav[0].clientWidth;
 let realWidth=138*tabs.length;  
+console.log("MAX WIDTH", maxWidth)
+console.log("REAL WIDTH", realWidth);
 if(realWidth>maxWidth){
+
+  console.log("CLARO QUE SE DEBEN MOSTRAR LOS CONTROLES")
 setShowControls(true);
 }else{
+  console.log("No DEBEN MOSTRAR LOS CONTROLES")
   setShowControls(false);
 }
   }
 
-});
+},[tabs])
+
+useEffect(() => {
+//Update the document title using the browser API
+  setTabs(props.tabs);
+
+}, [props.tabs]);
 //Default Styles for icons
 const  iconStyle={
   color:"#ffff",
@@ -136,11 +152,16 @@ return(
         {/**
         Here Goes the content of the  Tab
         */}
-        <div className="Tab-content">
+
         {/**Those are the btn controllers for the scrollbar */}
-          {showControls ? <div className="btn-left-scroll" onClick={() => { moveLeft() }} > </div> : ''}
+        {showControls ? <div className="btn-left-scroll" onClick={() => { moveLeft() }} > </div> : ''}
           {showControls ?
             <div className="btn-right-scroll" onClick={() => { moveRight() }}>  </div> : ''}
+
+      
+
+        <div className="Tab-content">
+
           {tab.content}
         </div>
       </Tab>

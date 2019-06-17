@@ -17,6 +17,7 @@ import { ValidationForm, TextInput } from 'react-bootstrap4-form-validation';
 import TreeViewSelectable from './treeViewSelectable';
 import { DATA_TREE_SELECTABLE } from './dataTreeSelectable';
 import ModalAlarm from './modal-alarms';
+import TabController from './TabController/TabController';
 
 /**
  * @file Global Components.
@@ -29473,15 +29474,16 @@ function App() {
 	const [ placeholders, setPlaceHolders ] = useState([]);
 	const [ selectType, setSelectType ] = useState('inputText');
 
-	let TABS = DATA_TABS;
+
+
 	const [ dataToDisplay, setDataToDisplay ] = useState({
 		DATA: DATA_TREE,
 		status: null,
 		name: null,
 		classNameFilter: null
 	});
-	const [ tabs, setTabs ] = useState(TABS);
-	const [ activeTab, setActiveTab ] = useState(TABS[0].title);
+	const [ tabs , setTabs ] = useState([...DATA_TABS]);
+	const [ activeTab, setActiveTab ] = useState(DATA_TABS[0].title);
 	const [ show, setShow ] = useState(true);
 	const [ searchText, setSearchText ] = useState('');
 
@@ -29751,6 +29753,17 @@ function App() {
 		alert(JSON.stringify(formData, null, 2));
 	};
 
+	const addNewTab =()=>{
+console.log("NEW TAB",);
+		let rand= Math.random();
+		let newTab=  { title: "Camer",
+		iconName: "fas fa-video",
+		content: "Nothing to show", icon: "icon-camera", closeable: true }
+	  let newT= [...tabs];
+	  newT.push(newTab);
+	  setTabs(newT);
+	}
+
 	const handleErrorSubmit = (e, formData, errorInputs) => {
 		console.error(errorInputs);
 	};
@@ -29793,7 +29806,7 @@ function App() {
 							clickSubMenuCtx={(res) => console.log('SubMenu ctx clicked-->', res)}
 						/> */}
 
-					<TreeView
+	{/* 				<TreeView
 						data={dataToDisplay.DATA}
 						onceClick={(res) => {
 							console.log('Clciked', res);
@@ -29811,12 +29824,16 @@ function App() {
 						status={dataToDisplay.status}
 						nameNode={dataToDisplay.name}
 						classNameFilter={dataToDisplay.classNameFilter}
-					/>
+					/> */}
 				</div>
 
 				<div className="tab-controller-content">
 					<div className="container">
 						<Jumbotron>
+
+							<button className="btn btn-primary" onClick={addNewTab}>
+AGREGAR TAB
+							</button>
 							<h1>Test of filters</h1>
 							<p>Click any header table to display a new filter</p>
 							<div className="container">
@@ -29836,6 +29853,19 @@ function App() {
 										setShowModalAlarm(!showModalAlarm);
 									}}
 								/> */}
+
+
+
+								<TabController tabs={tabs} activeTab={activeTab}
+								closeTab={(index)=>{
+									let newTabs= [...tabs];
+									newTabs.splice(1,index )	;
+									setTabs(newTabs);
+								}}
+								selectTab={(tab)=>{
+
+									setActiveTab(tab);
+								}}/>
 							</div>
 						</Jumbotron>
 					</div>
