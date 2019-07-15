@@ -42,18 +42,6 @@ const Node = props => {
 const [node, setNode] = useState(props)
 
 
-    useEffect(() => {
-        setNode(props);
-    }, [])
-
- /*     useEffect(() => {
-       
-    }, [node]) */
- 
-
-    useEffect(()=>{
-        setNode(props)
-    },[props])
     // console.log("Imprimiemdo props--->", props)
 
 
@@ -82,7 +70,7 @@ const [node, setNode] = useState(props)
                             <div className="iconos">
                                 <i className={node.iconClass.className} style={node.iconClass.style}></i>
                             </div>
-                            : ''}
+                            : null}
                         <span  style={node.labelStyle} >
                             {node.label}
 
@@ -121,7 +109,7 @@ const [node, setNode] = useState(props)
                                         <div className="badge-custom yellow"  >+</div>
                                     </OverlayTrigger>
                                     :
-                                    ''
+                                    null
                                 }
                             </div>
                             <div className={node.green === 0 ||
@@ -140,7 +128,7 @@ const [node, setNode] = useState(props)
                                         <div className="badge-custom green" >+</div>
                                     </OverlayTrigger>
                                     :
-                                    ''
+                                    null
                                 }
                             </div>
                             <div className={node.red === 0 ||
@@ -159,7 +147,7 @@ const [node, setNode] = useState(props)
                                         <div className="badge-custom red" >+</div>
                                     </OverlayTrigger>
                                     :
-                                    ''}
+                                    null}
                             </div>
                             <div className={node.gray === 0 ||
                                 props.status==1 ||
@@ -177,7 +165,7 @@ const [node, setNode] = useState(props)
                                         <div className="badge-custom gray"  >+</div>
                                     </OverlayTrigger>
                                     :
-                                    ''
+                                    null
                                 }
                             </div>
                         </div>
@@ -187,7 +175,7 @@ const [node, setNode] = useState(props)
                             <div className="icon-ctn" onClick={(e)=>{e.stopPropagation(); toggledSelf()}}>
                                 {node.icon ? !node.toggled ?
                                     <div className="icon-open animate-zoom   "></div> :
-                                    <div className="icon-close animate-opacity"></div> : ''}
+                                    <div className="icon-close animate-opacity"></div> : null}
                             </div>
                             :
                             <div className="icon-ctn">
@@ -196,8 +184,8 @@ const [node, setNode] = useState(props)
                 </div>
             </ContextMenuTrigger>
             <div className={node.toggled ? 'child visible-top ' : 'child visible-bottom'}>
-                {
-                    node.children
+                {node.children ?
+                    node.children: null
                 }
             </div>
             {node.menuCtx ? node.menuCtx.length > 0 ?
@@ -208,7 +196,7 @@ const [node, setNode] = useState(props)
                                 {option.id}
                             </MenuItem>
                         );
-                    }) : '' : ''}
+                    }) : null : null}
                     {
                         node.subMenus ? node.subMenus.length > 0 ? node.subMenus.map((submenu, index) => {
                             return (
@@ -221,13 +209,13 @@ const [node, setNode] = useState(props)
                                                 </MenuItem>
                                             );
                                         })
-                                        : '' : ''}
+                                        : null : null}
                                 </SubMenu>
                             );
                         })
-                            : '' : ''}
+                            : null: null}
                 </ContextMenu>
-                : '' : ''}
+                : null : null}
         </div>
     );
 }
