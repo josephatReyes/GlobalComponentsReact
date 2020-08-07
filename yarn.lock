@@ -2644,9 +2644,9 @@ clipboard-copy@^3.0.0:
   integrity sha512-1wgoaIRbRGTuv82jTpUgUkUFUQDF8H9hDa8IlkQfdETDHGk0CuisNPvFWNnPT/s3drikxhN33tvv54190c9lYA==
 
 clipboard@^2.0.0:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/clipboard/-/clipboard-2.0.4.tgz#836dafd66cf0fea5d71ce5d5b0bf6e958009112d"
-  integrity sha512-Vw26VSLRpJfBofiVaFb/I8PVfdI1OxKcYShe6fm0sP/DtmiWQNCjhM/okTvdCo0G+lMMm1rMYbk4IK4x1X+kgQ==
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/clipboard/-/clipboard-2.0.6.tgz#52921296eec0fdf77ead1749421b21c968647376"
+  integrity sha512-g5zbiixBRk/wyKakSwCKd7vQXDjFnAMGHoEyBogG/bw9kTD9GvdAvaoRR1ALcEzt3pVKxZR0pViekPMIS0QyGg==
   dependencies:
     good-listener "^1.2.2"
     select "^1.1.2"
@@ -6972,6 +6972,11 @@ mem@^4.0.0:
     mimic-fn "^2.0.0"
     p-is-promise "^2.0.0"
 
+"memoize-one@>=3.1.1 <6":
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-5.1.1.tgz#047b6e3199b508eaec03504de71229b8eb1d75c0"
+  integrity sha512-HKeeBpWvqiVJD57ZUAsJNm71eHTykffzcLZVYWiVfQeI1rJtuEaS7hQiEpWfVVk18donPwJEcFKIkCmPJNOhHA==
+
 memory-fs@^0.4.0, memory-fs@^0.4.1, memory-fs@~0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/memory-fs/-/memory-fs-0.4.1.tgz#3a9a20b8462523e447cfbc7e8bb80ed667bfc552"
@@ -8745,9 +8750,9 @@ pretty-format@^23.6.0:
     ansi-styles "^3.2.0"
 
 prismjs@^1.16.0:
-  version "1.16.0"
-  resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.16.0.tgz#406eb2c8aacb0f5f0f1167930cb83835d10a4308"
-  integrity sha512-OA4MKxjFZHSvZcisLGe14THYsug/nF6O1f0pAJc0KN0wTyAcLqmsbE+lTGKSpyh+9pEW57+k6pg2AfYR+coyHA==
+  version "1.21.0"
+  resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.21.0.tgz#36c086ec36b45319ec4218ee164c110f9fc015a3"
+  integrity sha512-uGdSIu1nk3kej2iZsLyDoJ7e9bnPzIgY0naW/HdknGj61zScaprVEVGHrPoXqI+M9sP0NDnTK2jpkvmldpuqDw==
   optionalDependencies:
     clipboard "^2.0.0"
 
@@ -9455,6 +9460,19 @@ react-treebeard@^3.2.0:
     prop-types "^15.6.2"
     shallowequal "^1.1.0"
     velocity-react "^1.4.1"
+
+react-virtualized-auto-sizer@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-virtualized-auto-sizer/-/react-virtualized-auto-sizer-1.0.2.tgz#a61dd4f756458bbf63bd895a92379f9b70f803bd"
+  integrity sha512-MYXhTY1BZpdJFjUovvYHVBmkq79szK/k7V3MO+36gJkWGkrXKtyr4vCPtpphaTLRAdDNoYEYFZWE8LjN+PIHNg==
+
+react-window@^1.8.5:
+  version "1.8.5"
+  resolved "https://registry.yarnpkg.com/react-window/-/react-window-1.8.5.tgz#a56b39307e79979721021f5d06a67742ecca52d1"
+  integrity sha512-HeTwlNa37AFa8MDZFZOKcNEkuF2YflA0hpGPiTT9vR7OawEt+GZbfM6wqkBahD3D3pUjIabQYzsnY/BSJbgq6Q==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    memoize-one ">=3.1.1 <6"
 
 react@^15.4.1:
   version "15.6.2"
